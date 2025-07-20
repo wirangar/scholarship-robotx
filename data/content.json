@@ -1,32 +1,89 @@
 {
+  "main_menu": {
+    "title": {
+      "fa": "منوی اصلی",
+      "en": "Main Menu",
+      "it": "Menu Principale"
+    },
+    "buttons": ["scholarships", "accommodation", "visa", "student_life"]
+  },
   "scholarships": {
-    "title": "بورسیه‌ها",
-    "options": [
-      {
-        "id": "dsu",
-        "title": "بورسیه استانی (DSU)",
-        "details": "این بورسیه بر اساس درآمد خانواده به دانشجویان تعلق می‌گیرد..."
+    "title": {
+      "fa": "بورسیه‌ها",
+      "en": "Scholarships",
+      "it": "Borse di studio"
+    },
+    "description": {
+        "fa": "لطفاً نوع بورسیه مورد نظر خود را انتخاب کنید:",
+        "en": "Please select the type of scholarship you are interested in:",
+        "it": "Seleziona il tipo di borsa di studio a cui sei interessato:"
+    },
+    "options": {
+      "dsu": {
+        "title": {
+          "fa": "بورسیه استانی (DSU)",
+          "en": "Regional Scholarship (DSU)",
+          "it": "Borsa di studio regionale (DSU)"
+        },
+        "details": {
+          "fa": "این بورسیه بر اساس درآمد خانواده به دانشجویان تعلق می‌گیرد و شامل تخفیف شهریه، کمک هزینه زندگی و وعده‌های غذایی یارانه‌ای است. ددلاین معمولاً در ماه آگوست است.",
+          "en": "This scholarship is based on family income and includes tuition fee waivers, a living allowance, and subsidized meals. The deadline is usually in August.",
+          "it": "Questa borsa di studio si basa sul reddito familiare e include l'esenzione dalle tasse universitarie, un'indennità di alloggio e pasti sovvenzionati. La scadenza è solitamente in agosto."
+        }
       },
-      {
-        "id": "unipg",
-        "title": "بورسیه دانشگاه پروجا",
-        "details": "دانشگاه پروجا بورسیه‌هایی بر اساس شایستگی تحصیلی ارائه می‌دهد..."
+      "university_of_perugia_phd": {
+        "title": {
+          "fa": "بورسیه دکتری دانشگاه پروجا",
+          "en": "University of Perugia PhD Scholarship",
+          "it": "Borsa di studio di dottorato Università di Perugia"
+        },
+        "deadline": "2024-10-15",
+        "requirements": {
+          "fa": ["مدرک کارشناسی ارشد", "پروپوزال تحقیقاتی", "توصیه‌نامه"],
+          "en": ["Master's degree", "Research proposal", "Recommendation letters"],
+          "it": ["Laurea magistrale", "Proposta di ricerca", "Lettere di raccomandazione"]
+        }
       }
-    ]
+    }
   },
   "accommodation": {
-    "title": "مسکن",
-    "options": [
-      {
-        "id": "dorms",
-        "title": "خوابگاه‌های دانشجویی",
-        "details": "اطلاعات مربوط به خوابگاه‌های دانشجویی و نحوه درخواست..."
-      },
-      {
-        "id": "private",
-        "title": "اجاره آپارتمان",
-        "details": "راهنمای اجاره آپارتمان در پروجا، مناطق مناسب و قیمت‌ها..."
-      }
-    ]
+    "title": {
+      "fa": "مسکن",
+      "en": "Accommodation",
+      "it": "Alloggio"
+    },
+    "description": {
+        "fa": "گزینه مورد نظر خود برای مسکن را انتخاب کنید:",
+        "en": "Choose your preferred accommodation option:",
+        "it": "Scegli l'opzione di alloggio che preferisci:"
+    },
+    "options": {
+        "dorms": {
+            "title": {
+                "fa": "خوابگاه‌های دانشجویی",
+                "en": "Student Dormitories",
+                "it": "Residenze universitarie"
+            },
+            "details": {
+                "fa": "خوابگاه‌ها توسط ADISU مدیریت می‌شوند و گزینه‌ای اقتصادی هستند.",
+                "en": "Dormitories are managed by ADISU and are an economical option.",
+                "it": "Le residenze sono gestite da ADISU e sono un'opzione economica."
+            }
+        }
+    }
+  },
+  "visa": {
+    "title": {
+      "fa": "مهاجرت و ویزا",
+      "en": "Immigration and Visa",
+      "it": "Immigrazione e Visto"
+    }
+  },
+  "student_life": {
+    "title": {
+      "fa": "زندگی دانشجویی",
+      "en": "Student Life",
+      "it": "Vita studentesca"
+    }
   }
 }

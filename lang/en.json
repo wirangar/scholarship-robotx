@@ -1,9 +1,6 @@
 {
-  "welcome": "Welcome to GlobalGuide! 👋 Your smart assistant for studying and living in Perugia. Where do we start?",
-  "main_menu": "Main Menu",
-  "scholarships": "Scholarships",
-  "accommodation": "Accommodation",
-  "contact_us": "Contact Us",
   "language_changed": "Language changed to English.",
-  "choose_language": "Please select your language:"
+  "choose_language": "Please select your language:",
+  "back_to_main_menu": "Back to Main Menu",
+  "error_occurred": "An error occurred. Please try again."
 }

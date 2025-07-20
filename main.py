@@ -1,12 +1,12 @@
-import json
 import logging
 import asyncio
 from fastapi import FastAPI, Request, Response
-from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 
 import config
 import database
+import content_manager as cm
 
 # Enable logging
 logging.basicConfig(
@@ -14,17 +14,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# --- Language and Content Loading ---
-def load_text(lang, key):
-    """Loads a text string from the language JSON files."""
-    try:
-        with open(f"lang/{lang}.json", "r", encoding="utf-8") as f:
-            texts = json.load(f)
-            return texts.get(key, f"_{key}_")
-    except FileNotFoundError:
-        with open(f"lang/{config.DEFAULT_LANGUAGE}.json", "r", encoding="utf-8") as f:
-            texts = json.load(f)
-            return texts.get(key, f"_{key}_")
+# --- Helper Functions ---
+def get_user_lang(context: ContextTypes.DEFAULT_TYPE, user) -> str:
+    """Gets the user's language, falling back to defaults."""
+    lang = context.user_data.get("language", user.language_code if user else config.DEFAULT_LANGUAGE)
+    if lang not in config.SUPPORTED_LANGUAGES:
+        return config.DEFAULT_LANGUAGE
+    return lang
 
 # --- Telegram Bot Setup ---
 ptb = (
@@ -42,23 +38,113 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if user:
         database.upsert_user(user)
 
-    user_lang = context.user_data.get("language", user.language_code or config.DEFAULT_LANGUAGE)
-    if user_lang not in config.SUPPORTED_LANGUAGES:
-        user_lang = config.DEFAULT_LANGUAGE
-    context.user_data["language"] = user_lang
+    lang = get_user_lang(context, user)
+    context.user_data["language"] = lang
 
-    welcome_message = load_text(user_lang, "welcome")
+    # Using the new content manager
+    welcome_message = cm.get_text('main_menu.title', lang) # A more appropriate welcome
 
-    main_menu_keyboard = [
-        [load_text(user_lang, "scholarships"), load_text(user_lang, "accommodation")],
-        [load_text(user_lang, "contact_us")],
-    ]
-    reply_markup = ReplyKeyboardMarkup(main_menu_keyboard, resize_keyboard=True)
+    # Dynamically create the main menu from content.json
+    menu_keys = cm.get_text('main_menu.buttons', lang)
+    buttons = [InlineKeyboardButton(cm.get_text(f'{key}.title', lang), callback_data=key) for key in menu_keys]
 
-    await update.message.reply_text(welcome_message, reply_markup=reply_markup)
+    # A simple way to create a 2-column layout
+    keyboard = [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    if update.callback_query:
+        # If we came here from a back button, edit the message
+        await update.callback_query.edit_message_text(text=welcome_message, reply_markup=reply_markup)
+    else:
+        # Otherwise, send a new message
+        await update.message.reply_text(welcome_message, reply_markup=reply_markup)
+
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handles all callback queries from inline buttons."""
+    query = update.callback_query
+    await query.answer() # Acknowledge the button press
+
+    path = query.data
+    lang = get_user_lang(context, update.effective_user)
+
+    # Check if the path leads to a sub-menu (has 'options' or 'buttons')
+    submenu_keys = cm.get_text(f'{path}.options', lang) or cm.get_text(f'{path}.buttons', lang)
+
+    if isinstance(submenu_keys, dict): # 'options' gives a dict of items
+        buttons = [
+            InlineKeyboardButton(
+                cm.get_text(f'{path}.options.{key}.title', lang),
+                callback_data=f'{path}.options.{key}'
+            ) for key in submenu_keys
+        ]
+        keyboard = [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
+        text = cm.get_text(f'{path}.description', lang) or cm.get_text(f'{path}.title', lang)
+
+    elif isinstance(submenu_keys, list): # 'buttons' gives a list of keys
+        buttons = [
+            InlineKeyboardButton(
+                cm.get_text(f'{key}.title', lang),
+                callback_data=key
+            ) for key in submenu_keys
+        ]
+        keyboard = [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
+        text = cm.get_text(f'{path}.description', lang) or cm.get_text(f'{path}.title', lang)
+
+    else:
+        # This is a leaf node, display the details
+        details = cm.get_text(f'{path}.details', lang)
+        title = cm.get_text(f'{path}.title', lang)
+
+        # Nicely format the details
+        text = f"*{title}*\n\n"
+        if isinstance(details, str):
+            text += details
+        elif isinstance(details, dict):
+            for key, value in details.items():
+                text += f"*{key.replace('_', ' ').title()}:* {value}\n"
+
+        # Also check for other fields like 'requirements' or 'deadline'
+        requirements = cm.get_text(f'{path}.requirements', lang)
+        if isinstance(requirements, list):
+            text += "\n*Requirements:*\n- " + "\n- ".join(requirements)
+
+        deadline = cm.get_text(f'{path}.deadline', lang)
+        if isinstance(deadline, str):
+            text += f"\n*Deadline:* {deadline}"
+
+        keyboard = []
+
+    # Add a "Back" button, except for the main menu
+    if '.' in path: # A simple way to check if we are in a sub-menu
+        parent_path = ".".join(path.split('.')[:-2]) # Go back to the parent 'options' or 'buttons' level
+        if not parent_path: # If parent is top-level category like 'scholarships'
+             parent_path = 'main_menu' # Special case to go back to main menu
+
+        # If we are at the top level of a category, the back button should go to the main menu.
+        if path in cm.get_text('main_menu.buttons', lang):
+            parent_path = 'main_menu'
+
+        back_text = cm.get_text(f'main_menu.title', lang) # Simplified back text
+        if parent_path != 'main_menu':
+            back_text = f"« {cm.get_text(f'{parent_path}.title', lang)}"
+        else:
+            back_text = "« " + back_text
+
+        # Special handler for main menu 'start'
+        back_callback = parent_path if parent_path != 'main_menu' else 'start'
+        keyboard.append([InlineKeyboardButton(back_text, callback_data=back_callback)])
+
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text(text=text, reply_markup=reply_markup, parse_mode='Markdown')
+
 
 # Add handlers to the application
 ptb.add_handler(CommandHandler("start", start))
+ptb.add_handler(CallbackQueryHandler(button_handler, pattern=lambda d: d != 'start'))
+# Special handler for the 'back to main menu' button
+ptb.add_handler(CallbackQueryHandler(start, pattern='start'))
 
 # --- FastAPI Web Server ---
 app = FastAPI()
