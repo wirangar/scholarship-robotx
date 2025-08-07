@@ -6,14 +6,17 @@ from config import TELEGRAM_BOT_TOKEN, BASE_URL, WEBHOOK_SECRET, BOT_ID, PORT
 from utils.logger import logger
 
 # Import handlers
-from handlers import cmd_start
+from handlers import cmd_start, news_handler
+from aiogram.fsm.storage.memory import MemoryStorage
 
 # Initialize Bot and Dispatcher
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
-dp = Dispatcher()
+# Use MemoryStorage for FSM. For production, a persistent storage like Redis is recommended.
+dp = Dispatcher(storage=MemoryStorage())
 
 # Include routers
 dp.include_router(cmd_start.router)
+dp.include_router(news_handler.router)
 
 # Initialize FastAPI app
 app = FastAPI()
