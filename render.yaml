@@ -1,0 +1,66 @@
+services:
+  - type: web
+    name: smartstudentbot
+    env: python
+    plan: free # Or your desired plan
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r smartstudentbot/requirements.txt -r smartstudentbot/dev-requirements.txt
+    startCommand: uvicorn smartstudentbot.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: BOT_ID
+        value: perugia
+      - key: CITY_NAME
+        value: Perugia
+      - key: TELEGRAM_BOT_TOKEN
+        fromSecret: TELEGRAM_BOT_TOKEN
+      - key: ADMIN_CHAT_IDS
+        value: 7801271819
+      - key: CHANNEL_ID
+        value: '@YourChannel'
+      - key: BASE_URL
+        fromService:
+          type: web
+          name: smartstudentbot
+          property: url
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: neondb # This should match the name of your Neon database service on Render
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: upstash-redis # This should match the name of your Redis service on Render
+          property: connectionString
+      - key: GOOGLE_CREDS
+        sync: false
+      - key: GOOGLE_DRIVE_CREDS
+        sync: false
+      - key: GOOGLE_DRIVE_UPLOAD_FOLDER_ID
+        value: 1YJuyU6H7MFfOmKuklzlibUkAYriKEKjh
+      - key: HUGGINGFACE_API_KEY
+        fromSecret: HUGGINGFACE_API_KEY
+      - key: OPENWEATHERMAP_API_KEY
+        fromSecret: OPENWEATHERMAP_API_KEY
+      - key: EXCHANGE_RATE_API_KEY
+        fromSecret: EXCHANGE_RATE_API_KEY
+      - key: EMAIL_SENDER
+        value: your_email@gmail.com
+      - key: EMAIL_PASSWORD
+        fromSecret: EMAIL_PASSWORD
+      - key: SHEET_ID
+        value: 1EsB54UL819KT2Sy51x2n-aSMDB6BZmA-N03vtNqxwuE
+      - key: QUESTIONS_SHEET_NAME
+        value: SmartStudentBotQuestions
+      - key: SPREADSHEET_NAME
+        value: Scholarship
+      - key: SQLITE_DB
+        value: data.db
+      - key: PORT
+        value: 8000
+      - key: JSON_VERSION
+        value: "1.0"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
