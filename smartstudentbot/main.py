@@ -34,12 +34,18 @@ async def bot_webhook(request: Request):
     await dp.feed_update(bot=bot, update=update)
     return Response(status_code=200)
 
+from utils.db_utils import init_db
+
 @app.on_event("startup")
 async def on_startup():
     """
     Actions to be performed on application startup.
-    This includes setting the webhook.
+    This includes initializing the database and setting the webhook.
     """
+    logger.info("Initializing database...")
+    await init_db()
+
+    logger.info("Setting webhook...")
     webhook_url = f"{BASE_URL}{WEBHOOK_PATH}"
     await bot.set_webhook(url=webhook_url)
     logger.info(f"Webhook set for bot {BOT_ID} at {webhook_url}")

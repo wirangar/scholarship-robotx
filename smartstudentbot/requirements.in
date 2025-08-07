@@ -1,5 +1,6 @@
 # python-telegram-bot==21.4  <- Replaced with aiogram as the code uses it
 aiogram==3.10.0
+aiosqlite==0.20.0
 fastapi==0.115.0
 uvicorn==0.30.6
 asyncpg==0.29.0
