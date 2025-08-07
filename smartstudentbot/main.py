@@ -32,7 +32,7 @@ async def bot_webhook(request: Request):
     telegram_update = await request.json()
     update = types.Update(**telegram_update)
     await dp.feed_update(bot=bot, update=update)
-    return Response(status_code=200)
+    return {"status": "ok"}
 
 from utils.db_utils import init_db
 
