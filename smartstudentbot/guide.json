@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "data": {
+    "en": {
+      "residency_permit": {
+        "title": "Residency Permit (Permesso di Soggiorno)",
+        "content": "The Permesso di Soggiorno is a mandatory document for non-EU students staying in Italy for more than 90 days. You must apply for it within 8 working days of your arrival.\n\n**Steps:**\n1. Go to a 'Patronato' or Post Office ('Poste Italiane') and ask for the 'Kit Giallo' (yellow kit).\n2. Fill out the forms with your personal data, passport details, and address in Perugia.\n3. You will need: a copy of your passport, visa, university enrollment letter, and health insurance.\n4. Submit the kit at the Post Office. You will be given an appointment for fingerprinting at the Police Headquarters (Questura).\n\nKeep the receipt ('ricevuta') with you at all times, as it serves as a temporary permit."
+      },
+      "transportation": {
+        "title": "Public Transportation",
+        "content": "Perugia's public transport is managed by 'Busitalia'.\n\n- **Buses:** A network of buses covers the entire city. Tickets can be bought at 'tabaccherie' (tobacco shops) or via the app.\n- **Minimetrò:** A light rail system that connects the lower part of the city (near the train station) to the city center.\n- **Student Pass:** You can get a monthly or annual student pass for a discounted price. You'll need your 'codice fiscale' and university enrollment proof."
+      },
+      "housing": {
+        "title": "Finding Housing",
+        "content": "Finding a place to live can be challenging. Start looking early!\n\n**Options:**\n- **University Dorms (ADiSU):** Limited spots, apply as soon as possible through the ADiSU website.\n- **Private Rentals:** Look for 'affitto stanza' (room for rent) on websites like Subito.it, Immobiliare.it, or Facebook groups.\n- **Contracts:** Always ask for a registered contract ('contratto registrato'). Avoid paying in cash without a receipt."
+      }
+    },
+    "fa": {
+      "residency_permit": {
+        "title": "کارت اقامت (Permesso di Soggiorno)",
+        "content": "کارت اقامت یا 'پرمسو دی سوجورنو' یک مدرک الزامی برای دانشجویان غیراروپایی است که بیش از ۹۰ روز در ایتالیا اقامت دارند. شما باید ظرف ۸ روز کاری پس از ورودتان برای آن اقدام کنید.\n\n**مراحل:**\n۱. به یک دفتر 'پاتروناتو' یا اداره پست ('پوسته ایتالیانه') بروید و 'کیت زرد' (Kit Giallo) را درخواست کنید.\n۲. فرم‌ها را با اطلاعات شخصی، مشخصات پاسپورت و آدرس خود در پروجا پر کنید.\n۳. مدارک مورد نیاز: کپی پاسپورت، ویزا، نامه ثبت‌نام دانشگاه و بیمه درمانی.\n۴. کیت را در اداره پست تحویل دهید. به شما یک وقت برای انگشت‌نگاری در اداره پلیس (Questura) داده خواهد شد.\n\nرسید ('ریچووتا') را همیشه همراه خود داشته باشید، زیرا به عنوان مجوز اقامت موقت شما عمل می‌کند."
+      },
+      "transportation": {
+        "title": "حمل و نقل عمومی",
+        "content": "حمل و نقل عمومی پروجا توسط شرکت 'بوس‌ایتالیا' مدیریت می‌شود.\n\n- **اتوبوس‌ها:** شبکه اتوبوسرانی تمام شهر را پوشش می‌دهد. بلیط‌ها را می‌توانید از 'تاباکی'ها (دکه‌های فروش تنباکو) یا از طریق اپلیکیشن خریداری کنید.\n- **مینی‌مترو:** یک قطار سبک که بخش پایینی شهر (نزدیک ایستگاه قطار) را به مرکز شهر متصل می‌کند.\n- **کارت دانشجویی:** می‌توانید کارت ماهانه یا سالانه دانشجویی را با تخفیف تهیه کنید. برای این کار به 'کدیچه فیسکاله' و گواهی ثبت‌نام دانشگاه نیاز دارید."
+      },
+      "housing": {
+        "title": "پیدا کردن خانه",
+        "content": "پیدا کردن محل اقامت می‌تواند چالش‌برانگیز باشد. زودتر شروع به جستجو کنید!\n\n**گزینه‌ها:**\n- **خوابگاه‌های دانشگاه (ADiSU):** تعداد محدود است، در اسرع وقت از طریق وب‌سایت ADiSU اقدام کنید.\n- **خانه‌های شخصی:** به دنبال 'آفیتو استانسا' (اتاق برای اجاره) در وب‌سایت‌هایی مانند Subito.it، Immobiliare.it یا گروه‌های فیسبوک باشید.\n- **قرارداد:** همیشه درخواست قرارداد رسمی و ثبت‌شده ('کنتراتو رجیستراتو') کنید. از پرداخت پول نقد بدون رسید خودداری کنید."
+      }
+    },
+    "it": {
+      "residency_permit": {
+        "title": "Permesso di Soggiorno",
+        "content": "Il Permesso di Soggiorno è un documento obbligatorio per gli studenti non comunitari che soggiornano in Italia per più di 90 giorni. È necessario richiederlo entro 8 giorni lavorativi dall'arrivo.\n\n**Procedura:**\n1. Recarsi presso un 'Patronato' o un Ufficio Postale ('Poste Italiane') e richiedere il 'Kit Giallo'.\n2. Compilare i moduli con i propri dati anagrafici, i dati del passaporto e l'indirizzo a Perugia.\n3. Avrai bisogno di: una copia del passaporto, del visto, della lettera di iscrizione all'università e dell'assicurazione sanitaria.\n4. Consegnare il kit all'Ufficio Postale. Ti verrà dato un appuntamento per il fotosegnalamento in Questura.\n\nConserva sempre la ricevuta, poiché funge da permesso temporaneo."
+      },
+      "transportation": {
+        "title": "Trasporto Pubblico",
+        "content": "Il trasporto pubblico di Perugia è gestito da 'Busitalia'.\n\n- **Autobus:** Una rete di autobus copre l'intera città. I biglietti possono essere acquistati nelle tabaccherie o tramite l'app.\n- **Minimetrò:** Un sistema di metropolitana leggera che collega la parte bassa della città (vicino alla stazione ferroviaria) al centro storico.\n- **Abbonamento Studenti:** È possibile ottenere un abbonamento mensile o annuale a prezzo scontato. Avrai bisogno del tuo codice fiscale e della prova di iscrizione all'università."
+      },
+      "housing": {
+        "title": "Trovare Alloggio",
+        "content": "Trovare un posto dove vivere può essere difficile. Inizia a cercare presto!\n\n**Opzioni:**\n- **Residenze Universitarie (ADiSU):** Posti limitati, fare domanda il prima possibile tramite il sito dell'ADiSU.\n- **Affitti Privati:** Cerca 'affitto stanza' su siti come Subito.it, Immobiliare.it o gruppi Facebook.\n- **Contratti:** Chiedi sempre un contratto registrato. Evita di pagare in contanti senza una ricevuta."
+      }
+    }
+  }
+}
