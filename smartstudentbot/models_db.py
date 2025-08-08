@@ -40,3 +40,24 @@ class User(Base):
 
     def __repr__(self) -> str:
         return f"<User(id={self.id}, user_id={self.user_id}, username='{self.username}')>"
+
+class Feedback(Base):
+    """
+    Represents user feedback in the database.
+    """
+    __tablename__ = "feedback"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(BigInteger, index=True, comment="Telegram User ID of the feedback provider")
+    rating: Mapped[int] = mapped_column(nullable=True, comment="A numeric rating, e.g., 1-5")
+    text: Mapped[str] = mapped_column(String(1024), nullable=True, comment="The feedback text content")
+
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime,
+        nullable=False,
+        server_default=func.now(),
+        comment="Timestamp of feedback submission"
+    )
+
+    def __repr__(self) -> str:
+        return f"<Feedback(id={self.id}, user_id={self.user_id}, rating={self.rating})>"

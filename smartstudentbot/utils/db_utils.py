@@ -87,3 +87,21 @@ async def get_user_language(user_id: int) -> str:
         stmt = select(User.language_code).where(User.user_id == user_id)
         lang_code = await session.scalar(stmt)
         return lang_code if lang_code else 'en'
+
+async def save_feedback(user_id: int, rating: int, text: str):
+    """
+    Saves a new feedback entry to the database.
+    """
+    if not AsyncSessionLocal:
+        logger.error("Database not initialized. Cannot save feedback.")
+        return
+
+    new_feedback = Feedback(user_id=user_id, rating=rating, text=text)
+    async with AsyncSessionLocal() as session:
+        try:
+            session.add(new_feedback)
+            await session.commit()
+            logger.info(f"Saved feedback from user {user_id}")
+        except SQLAlchemyError as e:
+            await session.rollback()
+            logger.error(f"Database error while saving feedback for user {user_id}: {e}")

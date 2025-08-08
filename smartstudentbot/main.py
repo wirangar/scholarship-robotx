@@ -6,7 +6,7 @@ from config import TELEGRAM_BOT_TOKEN, BASE_URL, WEBHOOK_SECRET, BOT_ID, PORT
 from utils.logger import logger
 
 # Import handlers
-from handlers import cmd_start, news_handler, guide_handler, isee_handler
+from handlers import cmd_start, news_handler, guide_handler, isee_handler, feedback_handler
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # Initialize Bot and Dispatcher
@@ -19,6 +19,7 @@ dp.include_router(cmd_start.router)
 dp.include_router(news_handler.router)
 dp.include_router(guide_handler.router)
 dp.include_router(isee_handler.router)
+dp.include_router(feedback_handler.router)
 
 # Initialize FastAPI app
 app = FastAPI()
