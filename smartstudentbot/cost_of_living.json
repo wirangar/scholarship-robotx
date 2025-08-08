@@ -1,4 +1,76 @@
 {
   "version": "1.0",
-  "data": []
+  "city": "Perugia",
+  "data": [
+    {
+      "category": "Housing",
+      "items": [
+        {
+          "name": "Single Room (Stanza Singola)",
+          "cost": "€250 - €350 per month",
+          "notes": "Prices vary based on location (center is more expensive) and building condition."
+        },
+        {
+          "name": "Shared Room (Posto Letto)",
+          "cost": "€180 - €250 per month",
+          "notes": "A bed in a double room."
+        },
+        {
+          "name": "Utilities (Bollette)",
+          "cost": "€40 - €70 per person, per month",
+          "notes": "Includes electricity, gas, water, and internet. Highly variable."
+        }
+      ]
+    },
+    {
+      "category": "Food",
+      "items": [
+        {
+          "name": "Groceries",
+          "cost": "€150 - €250 per month",
+          "notes": "Shopping at supermarkets like Coop, Conad, or discounters like Lidl and Eurospin."
+        },
+        {
+          "name": "University Mensa (Canteen)",
+          "cost": "€3 - €6 per meal",
+          "notes": "A full meal (primo, secondo, contorno) at a subsidized price."
+        },
+        {
+          "name": "Pizza at a Pizzeria",
+          "cost": "€7 - €12",
+          "notes": "For a standard pizza and a drink."
+        }
+      ]
+    },
+    {
+      "category": "Transportation",
+      "items": [
+        {
+          "name": "Monthly Student Bus Pass",
+          "cost": "Around €35 per month",
+          "notes": "Provides unlimited travel on buses and the Minimetrò."
+        },
+        {
+          "name": "Single Bus/Minimetrò Ticket",
+          "cost": "€1.50",
+          "notes": "Valid for 70 minutes."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "items": [
+        {
+          "name": "Gym Membership",
+          "cost": "€30 - €50 per month",
+          "notes": ""
+        },
+        {
+          "name": "Aperitivo (Evening Drink with Buffet)",
+          "cost": "€8 - €12",
+          "notes": ""
+        }
+      ]
+    }
+  ]
 }

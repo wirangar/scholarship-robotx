@@ -1,4 +1,48 @@
 {
   "version": "1.0",
-  "data": []
+  "data": [
+    {
+      "name": "EAT & DRINK",
+      "description": "Discounts at local pizzerias, bars, and cafes.",
+      "items": [
+        {
+          "place": "Pizzeria Mediterranea",
+          "offer": "10% off on all pizzas for students (show university card).",
+          "address": "Via dei Priori, 7"
+        },
+        {
+          "place": "Caffè Morlacchi",
+          "offer": "Special price on cappuccino + cornetto breakfast.",
+          "address": "Piazza Morlacchi"
+        }
+      ]
+    },
+    {
+      "name": "CULTURE & LEISURE",
+      "description": "Reduced tickets for museums, cinemas, and events.",
+      "items": [
+        {
+          "place": "Galleria Nazionale dell'Umbria",
+          "offer": "Reduced ticket price of €2 for university students.",
+          "address": "Corso Pietro Vannucci, 19"
+        },
+        {
+          "place": "PostModernissimo Cinema",
+          "offer": "Discounted tickets on Wednesdays for students.",
+          "address": "Via del Carmine, 4"
+        }
+      ]
+    },
+    {
+      "name": "SHOPPING",
+      "description": "Special offers at bookstores and other shops.",
+      "items": [
+        {
+          "place": "Libreria Feltrinelli",
+          "offer": "5% off on non-academic books.",
+          "address": "Corso Pietro Vannucci, 78"
+        }
+      ]
+    }
+  ]
 }

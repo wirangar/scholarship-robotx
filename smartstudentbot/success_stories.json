@@ -1,4 +1,23 @@
 {
   "version": "1.0",
-  "data": []
+  "data": [
+    {
+      "author": "Sana, from Iran",
+      "field": "Computer Science",
+      "story": "When I first arrived in Perugia, I felt a bit lost. The language was a barrier, and the bureaucracy seemed overwhelming. However, I used the resources from the university and connected with other international students. I focused on my studies, and after two years, I graduated with top marks. My advice is to be patient, ask for help, and never give up on your goals. Now, I work as a software engineer in Milan!",
+      "photo_id": null
+    },
+    {
+      "author": "David, from the USA",
+      "field": "Italian Language and Culture",
+      "story": "I came to Perugia to immerse myself in the Italian language. The city is the perfect size – big enough to be interesting, but small enough to feel like home. I joined a local tandem language exchange group and made many Italian friends. The key was to practice speaking every single day, even when it was difficult. After a year, I was fluent and had a deep appreciation for the culture.",
+      "photo_id": null
+    },
+    {
+      "author": "Fatima, from Morocco",
+      "field": "Medicine",
+      "story": "The path to studying medicine in Italy is long, but it's worth it. The university has excellent professors. I struggled with some of the exams, but I formed a study group with my classmates, and we supported each other. The ADiSU scholarship was also a huge help financially. My success came from discipline and teamwork.",
+      "photo_id": null
+    }
+  ]
 }
