@@ -1,4 +1,7 @@
 {
   "version": "1.0",
-  "data": []
+  "data": {
+    "What is ISEE?": "ISEE is an indicator used to assess the economic situation of families in Italy. It is required for many university services, including scholarships and fee reductions.",
+    "How do I apply for a residency permit?": "You must apply for a residency permit (Permesso di Soggiorno) within 8 working days of your arrival in Italy. You need to get the 'Kit Giallo' from a Post Office, fill it out, and submit it."
+  }
 }
