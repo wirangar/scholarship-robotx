@@ -30,6 +30,29 @@ def validate_file(file_size: int, file_type: str) -> bool:
 
     return True
 
+import os
+from functools import lru_cache
+
+# Define the base directory of the project (smartstudentbot)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LANG_DIR = os.path.join(BASE_DIR, "lang")
+
+@lru_cache(maxsize=10) # Cache up to 10 language files
+def load_language_data(lang: str = "en") -> dict:
+    """
+    Loads a language JSON file from the lang directory.
+    Falls back to English if the specified language is not found.
+    Caches the result to avoid repeated file I/O.
+    """
+    file_path = os.path.join(LANG_DIR, f"{lang}.json")
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        # Fallback to English and avoid trying to load a non-existent file again
+        with open(os.path.join(LANG_DIR, "en.json"), "r", encoding="utf-8") as f:
+            return json.load(f)
+
 def check_json_version(file_path: str, expected_version: str = JSON_VERSION) -> Dict[str, Any]:
     """
     Loads a JSON file and checks if its version matches the expected version.

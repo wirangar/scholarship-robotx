@@ -1,36 +1,63 @@
-import json
-import os
-from aiogram import Router, types
+from aiogram import F, Router, types
 from aiogram.filters import Command
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
 from utils.logger import log_action
+from utils.db_utils import get_or_create_user
+from utils.common import load_language_data
 
 router = Router()
 
-# Construct the absolute path to the lang directory
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LANG_DIR = os.path.join(BASE_DIR, "lang")
-
-def load_lang(lang: str = "en") -> dict:
-    """
-    Loads the language JSON file.
-    """
-    lang_file_path = os.path.join(LANG_DIR, f"{lang}.json")
-    try:
-        with open(lang_file_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        # Fallback to English if the specified language is not found
-        with open(os.path.join(LANG_DIR, "en.json"), "r", encoding="utf-8") as f:
-            return json.load(f)
+from aiogram import Bot
 
 @router.message(Command("start"))
-async def cmd_start(message: types.Message):
+async def cmd_start(message: types.Message, bot: Bot):
     """
     Handles the /start command.
+    Greets the user, ensures they are in the database, and prompts them to select a language.
     """
-    # For now, we use the default language. Later, this can be tied to user profile.
-    lang_data = load_lang()
-    welcome_msg = lang_data.get("welcome_message", "Welcome to SmartStudentBot!")
-
-    await message.reply(welcome_msg)
+    # Get or create the user in the database
+    db_user = await get_or_create_user(message.from_user)
     log_action("start_command", message.from_user.id)
+
+    # Create an inline keyboard for language selection
+    builder = InlineKeyboardBuilder()
+    builder.button(text="🇬🇧 English", callback_data="set_lang_en")
+    builder.button(text="🇮🇷 فارسی", callback_data="set_lang_fa")
+    builder.button(text="🇮🇹 Italiano", callback_data="set_lang_it")
+    builder.adjust(1)  # Arrange buttons in a single column
+
+    # Get a generic, multi-language greeting
+    en_data = load_language_data("en")
+    fa_data = load_language_data("fa")
+    it_data = load_language_data("it")
+
+    greeting_text = (
+        f"{en_data.get('welcome_message', 'Welcome!')}\n"
+        f"{fa_data.get('welcome_message', 'خوش آمدید!')}\n"
+        f"{it_data.get('welcome_message', 'Benvenuto!')}\n\n"
+        "Please select your language:"
+    )
+    # Use bot.send_message for easier mocking
+    await bot.send_message(message.chat.id, greeting_text, reply_markup=builder.as_markup())
+
+
+@router.callback_query(F.data.startswith("set_lang_"))
+async def set_language(callback_query: types.CallbackQuery):
+    """
+    Handles the language selection callback.
+    Updates the user's language in the database and sends a confirmation.
+    """
+    from utils.db_utils import update_user_language
+
+    lang_code = callback_query.data.split("_")[-1]
+    user_id = callback_query.from_user.id
+
+    await update_user_language(user_id, lang_code)
+    log_action("set_language", user_id, f"Lang: {lang_code}")
+
+    lang_data = load_language_data(lang_code)
+    welcome_msg = lang_data.get("welcome_message", "Welcome!")
+
+    await callback_query.message.edit_text(welcome_msg, reply_markup=None)
+    await callback_query.answer()
