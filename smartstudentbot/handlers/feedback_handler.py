@@ -65,12 +65,19 @@ async def process_feedback_text(message: types.Message, state: FSMContext):
     rating = user_data.get("rating", 0)
     user_id = message.from_user.id
 
+    from utils.gamification_utils import add_points
     # Save the feedback
     await save_feedback(user_id=user_id, rating=rating, text=feedback_text)
 
+    # Award points for feedback
+    await add_points(user_id, 5) # e.g., 5 points for feedback
+
     log_action("feedback_submitted", user_id, f"Rating: {rating}")
 
-    await message.reply("Thank you for your feedback! We appreciate your help in improving this bot.")
+    await message.reply(
+        "Thank you for your feedback! We appreciate your help in improving this bot.\n"
+        "You've been awarded 5 points for your contribution!"
+    )
 
     # End the conversation
     await state.clear()

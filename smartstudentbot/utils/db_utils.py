@@ -50,6 +50,7 @@ async def get_or_create_user(tg_user: types.User) -> User | None:
                 await session.refresh(user)
             return user
 
+        from utils.gamification_utils import add_points
         new_user = User(
             user_id=tg_user.id,
             username=tg_user.username,
@@ -61,6 +62,10 @@ async def get_or_create_user(tg_user: types.User) -> User | None:
         await session.commit()
         await session.refresh(new_user)
         logger.info(f"New user created: {tg_user.id}")
+
+        # Award points for registering
+        await add_points(tg_user.id, 10) # e.g., 10 points for joining
+
         return new_user
 
 async def update_user_language(user_id: int, lang_code: str):

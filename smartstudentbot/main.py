@@ -8,7 +8,8 @@ from utils.logger import logger
 # Import handlers
 from handlers import (
     cmd_start, news_handler, guide_handler, isee_handler, feedback_handler,
-    cost_handler, discount_handler, success_story_handler, weather_handler
+    cost_handler, discount_handler, success_story_handler, weather_handler,
+    gamification_handler
 )
 from aiogram.fsm.storage.memory import MemoryStorage
 
@@ -27,6 +28,7 @@ dp.include_router(cost_handler.router)
 dp.include_router(discount_handler.router)
 dp.include_router(success_story_handler.router)
 dp.include_router(weather_handler.router)
+dp.include_router(gamification_handler.router)
 
 # Initialize FastAPI app
 app = FastAPI()

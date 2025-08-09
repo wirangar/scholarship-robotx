@@ -59,5 +59,50 @@ class Feedback(Base):
         comment="Timestamp of feedback submission"
     )
 
+from sqlalchemy import ForeignKey
+
     def __repr__(self) -> str:
         return f"<Feedback(id={self.id}, user_id={self.user_id}, rating={self.rating})>"
+
+class UserPoints(Base):
+    """
+    Stores the points for each user.
+    """
+    __tablename__ = "user_points"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("users.user_id"), unique=True, index=True)
+    points: Mapped[int] = mapped_column(default=0, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"<UserPoints(user_id={self.user_id}, points={self.points})>"
+
+class Badge(Base):
+    """
+    Defines the available badges in the system.
+    """
+    __tablename__ = "badges"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, comment="e.g., 'First Feedback'")
+    description: Mapped[str] = mapped_column(String(255), nullable=False)
+    icon: Mapped[str] = mapped_column(String(10), nullable=False, comment="An emoji for the badge")
+
+    def __repr__(self) -> str:
+        return f"<Badge(name='{self.name}')>"
+
+class UserBadge(Base):
+    """
+    Association table linking users to the badges they have earned.
+    """
+    __tablename__ = "user_badges"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("users.user_id"), index=True)
+    badge_id: Mapped[int] = mapped_column(ForeignKey("badges.id"), index=True)
+
+    awarded_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime,
+        nullable=False,
+        server_default=func.now()
+    )
