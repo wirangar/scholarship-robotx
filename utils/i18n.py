@@ -92,6 +92,44 @@ _{notes}_""",
 🤔 دمای محسوس: *{feels_like:.1f}°C*
 💧 رطوبت: *{humidity}%*
 💨 سرعت باد: *{wind_speed:.1f} m/s*""",
+        # --- Simulation ---
+        'sim_select_city': "شبیه‌ساز بودجه: لطفاً یک شهر را انتخاب کنید.",
+        'sim_ask_housing': "چه نوع مسکنی را ترجیح می‌دهید؟",
+        'sim_housing_single': "اتاق یک نفره",
+        'sim_housing_shared': "اتاق اشتراکی",
+        'sim_ask_lifestyle': "سبک زندگی و تفریحات خود را چگونه توصیف می‌کنید؟",
+        'sim_results_template': """✅ *نتیجه شبیه‌سازی بودجه ماهانه*
+
+- اجاره: *€{rent}*
+- خدمات (آب، برق، ...): *€{utilities}*
+- حمل و نقل: *€{transport}*
+- خواربار: *€{groceries}*
+- تفریحات و سایر: *€{leisure}*
+
+- *مجموع تخمینی: €{total}*""",
+        # --- Consultation ---
+        'consult_start': "به سرویس مشاوره تحصیلی خوش آمدید.\nبرای شناخت بهتر پروفایل شما، چند سوال خواهیم پرسید.\n\nابتدا، رشته تحصیلی مورد نظر شما چیست؟",
+        'consult_ask_gpa': "معدل فعلی شما چند است؟ (در مقیاس ۴ یا ۲۰ - لطفاً مقیاس را مشخص کنید)",
+        'consult_ask_budget': "بودجه سالانه تخمینی شما برای تحصیل به یورو چقدر است؟",
+        'consult_ask_language': "سطح فعلی زبان ایتالیایی یا انگلیسی شما چیست؟ (مانند B1، آیلتس ۶.۵)",
+        'consult_ask_cv': "در آخر، لطفاً فایل رزومه (CV) خود را با فرمت PDF یا DOCX آپلود کنید.",
+        'consult_uploading_cv': "در حال آپلود رزومه شما، لطفاً صبر کنید...",
+        'consult_error_cv_upload': "در هنگام آپلود رزومه شما خطایی رخ داد. لطفاً دوباره تلاش کنید یا با ادمین تماس بگیرید.",
+        'consult_error_cv_format': "این یک فایل رزومه معتبر به نظر نمی‌رسد. لطفاً یک سند PDF یا DOCX ارسال کنید.",
+        'consult_success': "✅ متشکریم! درخواست مشاوره شما ثبت شد. به زودی با شما تماس خواهیم گرفت.",
+        'consult_error_saving': "در هنگام ذخیره درخواست شما خطایی رخ داد. لطفاً با ادمین تماس بگیرید.",
+        # --- Roommate ---
+        'roommate_welcome': "به بخش هم‌اتاقی‌یابی خوش آمدید! چه کاری می‌خواهید انجام دهید؟",
+        'roommate_button_create': "📝 ساخت / به‌روزرسانی پروفایل",
+        'roommate_button_search': "🔍 جستجوی هم‌اتاقی",
+        'roommate_create_start': "بیایید پروفایل هم‌اتاقی شما را بسازیم.\n\nبودجه ماهانه شما برای اجاره به یورو چقدر است؟",
+        'roommate_ask_location': "در کدام منطقه به دنبال خانه هستید؟ (مانند Centro، Elce)",
+        'roommate_ask_habits': "شما در خانه فردی آرام هستید یا اجتماعی؟ (آرام/اجتماعی)",
+        'roommate_ask_bio': "عالی! در آخر، یک بیوگرافی کوتاه درباره خودتان بنویسید (مثلاً سرگرمی‌ها، رشته تحصیلی).",
+        'roommate_profile_saved': "✅ پروفایل هم‌اتاقی شما با موفقیت ذخیره شد!",
+        'roommate_error_saving': "هنگام ذخیره پروفایل شما خطایی رخ داد.",
+        'roommate_search_wip': "🔍 بخش جستجوی هم‌اتاقی هنوز پیاده‌سازی نشده است. لطفاً بعداً دوباره سر بزنید!",
+        'error_invalid_budget': "لطفاً برای بودجه یک عدد معتبر وارد کنید.",
     },
     'en': {
         'welcome': "🇮🇹 Welcome to the Perugia Student and Immigrant Helper Bot!\n\nPlease register to access the features.",
@@ -180,6 +218,44 @@ _{notes}_""",
 🤔 Feels like: *{feels_like:.1f}°C*
 💧 Humidity: *{humidity}%*
 💨 Wind: *{wind_speed:.1f} m/s*""",
+        # --- Simulation ---
+        'sim_select_city': "Budget Simulator: Please select a city.",
+        'sim_ask_housing': "What type of housing do you prefer?",
+        'sim_housing_single': "Single Room",
+        'sim_housing_shared': "Shared Room",
+        'sim_ask_lifestyle': "How would you describe your lifestyle and leisure habits?",
+        'sim_results_template': """✅ *Monthly Budget Simulation Results*
+
+- Rent: *€{rent}*
+- Utilities (water, electricity, ...): *€{utilities}*
+- Transport: *€{transport}*
+- Groceries: *€{groceries}*
+- Leisure & Other: *€{leisure}*
+
+- *Estimated Total: €{total}*""",
+        # --- Consultation ---
+        'consult_start': "Welcome to the Academic Consultation service.\nWe will ask a few questions to understand your profile.\n\nFirst, what is your intended field of study?",
+        'consult_ask_gpa': "What is your current GPA (on a scale of 4.0 or 20)? Please specify the scale.",
+        'consult_ask_budget': "What is your estimated annual budget for studying in EUR?",
+        'consult_ask_language': "What is your current Italian or English language proficiency level (e.g., B1, IELTS 6.5)?",
+        'consult_ask_cv': "Finally, please upload your CV or resume as a PDF or DOCX file.",
+        'consult_uploading_cv': "Uploading your CV, please wait...",
+        'consult_error_cv_upload': "There was an error uploading your CV. Please try again or contact an admin.",
+        'consult_error_cv_format': "That doesn't seem to be a valid CV file. Please send a PDF or DOCX document.",
+        'consult_success': "✅ Thank you! Your consultation request has been submitted. We will get back to you soon.",
+        'consult_error_saving': "There was an error saving your request. Please contact an admin.",
+        # --- Roommate ---
+        'roommate_welcome': "Welcome to the Roommate Finder! What would you like to do?",
+        'roommate_button_create': "📝 Create / Update Profile",
+        'roommate_button_search': "🔍 Search for Roommates",
+        'roommate_create_start': "Let's create your roommate profile.\n\nWhat is your monthly budget for rent in EUR?",
+        'roommate_ask_location': "Which area are you looking to live in? (e.g., Centro, Elce)",
+        'roommate_ask_habits': "Are you more of a quiet or social person at home? (Quiet/Social)",
+        'roommate_ask_bio': "Great! Lastly, write a short bio about yourself (e.g., your hobbies, what you're studying).",
+        'roommate_profile_saved': "✅ Your roommate profile has been saved successfully!",
+        'roommate_error_saving': "An error occurred while saving your profile.",
+        'roommate_search_wip': "🔍 Roommate search is not yet implemented. Please check back later!",
+        'error_invalid_budget': "Please enter a valid number for your budget.",
     },
     'it': {
         # Italian translations would go here
