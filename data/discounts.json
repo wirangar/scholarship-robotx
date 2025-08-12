@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "discounts": [
+    {
+      "id": "mensa",
+      "name_fa": "سلف دانشگاه (Mensa)",
+      "name_en": "University Canteen (Mensa)",
+      "description_fa": "وعده‌های غذایی کامل با قیمت یارانه‌ای برای دانشجویان. برای استفاده نیاز به کارت دانشجویی یا ثبت‌نام در ADISU دارید.",
+      "description_en": "Full meals at a subsidized price for students. You need a student card or ADISU registration to use it.",
+      "location": "Various locations near university departments",
+      "tags": ["food", "adisurc", "perugia"]
+    },
+    {
+      "id": "bus_pass",
+      "name_fa": "بلیط اتوبوس شهری",
+      "name_en": "City Bus Pass",
+      "description_fa": "شرکت Busitalia تخفیف‌های قابل توجهی برای بلیط‌های سالانه دانشجویان زیر ۲۶ سال ارائه می‌دهد.",
+      "description_en": "Busitalia offers significant discounts on annual passes for students under 26.",
+      "location": "Busitalia ticket office",
+      "link": "https://www.fsbusitalia.it/content/fsbusitalia/it/turismo/servizi-speciali/perugia-special.html",
+      "tags": ["transport", "bus", "perugia"]
+    },
+    {
+      "id": "cinema",
+      "name_fa": "سینما",
+      "name_en": "Cinema",
+      "description_fa": "بسیاری از سینماها در پروجا (مانند PostModernissimo) در روزهای خاصی از هفته برای دانشجویان تخفیف دارند.",
+      "description_en": "Many cinemas in Perugia (like PostModernissimo) offer student discounts on specific days of the week.",
+      "location": "Various cinemas",
+      "tags": ["leisure", "entertainment", "perugia"]
+    },
+    {
+      "id": "museums",
+      "name_fa": "موزه‌ها و گالری‌ها",
+      "name_en": "Museums & Galleries",
+      "description_fa": "موزه‌های دولتی معمولاً برای دانشجویان اتحادیه اروپا (۱۸-۲۵ سال) ورودی با تخفیف یا رایگان دارند.",
+      "description_en": "State-run museums often have reduced or free entry for EU students aged 18-25.",
+      "location": "City-wide",
+      "tags": ["culture", "leisure", "perugia"]
+    }
+  ]
+}

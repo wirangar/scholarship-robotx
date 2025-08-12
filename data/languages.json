@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "greetings",
+      "title_fa": "احوال‌پرسی و تعارفات",
+      "title_en": "Greetings",
+      "phrases": [
+        {"it": "Ciao!", "en": "Hello! / Hi! / Bye!", "fa": "سلام! / خداحافظ!"},
+        {"it": "Buongiorno", "en": "Good morning", "fa": "صبح بخیر"},
+        {"it": "Buonasera", "en": "Good evening", "fa": "عصر بخیر"},
+        {"it": "Come stai?", "en": "How are you?", "fa": "حالت چطور است؟"},
+        {"it": "Sto bene, grazie. E tu?", "en": "I'm fine, thank you. And you?", "fa": "من خوبم، ممنون. و تو؟"},
+        {"it": "Per favore", "en": "Please", "fa": "لطفاً"},
+        {"it": "Grazie (mille)", "en": "(Many) thanks", "fa": "(خیلی) ممنون"},
+        {"it": "Prego", "en": "You're welcome", "fa": "خواهش می‌کنم"}
+      ]
+    },
+    {
+      "id": "university",
+      "title_fa": "دانشگاه",
+      "title_en": "University",
+      "phrases": [
+        {"it": "Dov'è la segreteria studenti?", "en": "Where is the student office?", "fa": "اداره دانشجویی کجاست؟"},
+        {"it": "Ho un esame oggi.", "en": "I have an exam today.", "fa": "من امروز امتحان دارم."},
+        {"it": "A che ora inizia la lezione?", "en": "What time does the lesson start?", "fa": "کلاس کی شروع می‌شود؟"},
+        {"it": "Questa è l'aula magna?", "en": "Is this the main lecture hall?", "fa": "این سالن اصلی سخنرانی است؟"}
+      ]
+    },
+    {
+      "id": "food",
+      "title_fa": "غذا و رستوران",
+      "title_en": "Food & Restaurant",
+      "phrases": [
+        {"it": "Vorrei prenotare un tavolo per due.", "en": "I would like to book a table for two.", "fa": "می‌خواهم یک میز برای دو نفر رزرو کنم."},
+        {"it": "Il conto, per favore.", "en": "The bill, please.", "fa": "صورتحساب، لطفاً."},
+        {"it": "Posso avere il menù?", "en": "Can I have the menu?", "fa": "می‌توانم منو را داشته باشم؟"},
+        {"it": "Un caffè, per favore.", "en": "A coffee, please.", "fa": "یک قهوه، لطفاً."}
+      ]
+    }
+  ]
+}

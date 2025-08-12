@@ -70,4 +70,5 @@ ISEE_FAMILY_EXTRA_MEMBER_COEFF = 0.35
 
 # --- Other Constants ---
 GITHUB_DATA_URL = "https://raw.githubusercontent.com/your_username/your_repo/main/data/" # Placeholder
+NEWS_RSS_URL = "https://www.example.com/rss.xml" # Placeholder for a university news feed
 CACHE_TTL_SECONDS = 15 * 60  # 15 minutes

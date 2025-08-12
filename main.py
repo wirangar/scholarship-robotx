@@ -17,7 +17,7 @@ from utils.redis_utils import redis_client
 from utils.gsheets import service as gsheets_service
 
 # --- Import Handlers ---
-from handlers import start_menu, register, isee
+from handlers import start_menu, register, isee, resources_hub, news, search, live_chat, weather, cost, language, profile, feedback, upload, discounts
 # ... other handlers will be imported here as they are implemented
 
 # --- Logging ---
@@ -60,7 +60,48 @@ async def on_startup():
     application.add_handler(CommandHandler("start", start_menu.protected_start))
     application.add_handler(register.register_conv_handler)
     application.add_handler(isee.isee_conv_handler)
-    # The generic button handler should be last, to act as a fallback for buttons not handled by conversations.
+
+    # Add Resources Hub handlers
+    application.add_handler(CommandHandler("hub", resources_hub.hub_main_menu))
+    application.add_handler(CallbackQueryHandler(resources_hub.hub_main_menu, pattern='^hub_main$'))
+    application.add_handler(CallbackQueryHandler(resources_hub.hub_callback_handler, pattern='^hub_'))
+
+    # Add News handlers
+    application.add_handler(CommandHandler("news", news.news_menu))
+    application.add_handler(CallbackQueryHandler(news.news_menu, pattern='^news_page_'))
+
+    # Add Search handler
+    application.add_handler(search.search_conv_handler)
+
+    # Add Live Chat handlers
+    application.add_handler(live_chat.live_chat_conv_handler)
+    application.add_handler(live_chat.admin_reply_handler)
+
+    # Add Weather handler
+    application.add_handler(weather.weather_conv_handler)
+
+    # Add Cost of Living handler
+    application.add_handler(cost.cost_conv_handler)
+
+    # Add Language handler
+    application.add_handler(language.language_conv_handler)
+
+    # Add Profile handlers
+    application.add_handler(profile.profile_handler)
+    application.add_handler(profile.profile_callback)
+
+    # Add Feedback handler
+    application.add_handler(feedback.feedback_conv_handler)
+
+    # Add Upload handler
+    application.add_handler(upload.upload_conv_handler)
+
+    # Add Discounts handlers
+    application.add_handler(discounts.discounts_command_handler)
+    application.add_handler(discounts.discounts_callback_handler)
+
+    # The generic button handler from start_menu should be one of the last,
+    # to act as a fallback for buttons not handled by more specific handlers.
     application.add_handler(CallbackQueryHandler(start_menu.button_handler))
     logger.info("Bot handlers successfully registered.")
 
