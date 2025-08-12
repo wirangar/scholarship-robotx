@@ -156,6 +156,19 @@ _{notes}_""",
         'story_success': "✅ داستان شما با موفقیت ثبت شد و پس از بازبینی منتشر خواهد شد. متشکریم!",
         'button_yes': "✅ بله",
         'button_no': "❌ نه",
+        # --- Q&A ---
+        'qna_ask_question': "سوال خود را تایپ کنید. ما ابتدا در سوالات متداول جستجو می‌کنیم.",
+        'qna_suggestions_found': "چند سوال مشابه پیدا کردیم. آیا جواب شما اینجاست؟\nاگر نه، دکمه زیر را بزنید تا سوالتان ثبت شود.",
+        'qna_submit_anyway': "سوال من این نیست، ثبتش کن",
+        'qna_success': "✅ سوال شما با موفقیت ثبت شد. ادمین‌ها به زودی پاسخ خواهند داد.",
+        'qna_answer_notification': """پاسخ سوال شما داده شد:
+
+*سوال شما*: {question}
+*پاسخ*: {answer}""",
+        # --- Migration Status ---
+        'migration_checklist_title': "📋 *چک‌لیست مراحل مهاجرت و اقامت*\n\nاین یک راهنمای کلی است. مراحل ممکن است متفاوت باشند.",
+        # --- Points ---
+        'points_display': "🏆 شما در حال حاضر *{points}* امتیاز دارید. برای مشارکت بیشتر، امتیاز بیشتری کسب کنید!",
     },
     'en': {
         'welcome': "🇮🇹 Welcome to the Perugia Student and Immigrant Helper Bot!\n\nPlease register to access the features.",
@@ -308,6 +321,19 @@ _{notes}_""",
         'story_success': "✅ Your story has been successfully submitted and will be published after review. Thank you!",
         'button_yes': "✅ Yes",
         'button_no': "❌ No",
+        # --- Q&A ---
+        'qna_ask_question': "Type your question. We'll search our FAQ first.",
+        'qna_suggestions_found': "We found a few similar questions. Is your answer here?\nIf not, press the button below to submit your question.",
+        'qna_submit_anyway': "This is not my question, submit it",
+        'qna_success': "✅ Your question has been successfully submitted. The admins will answer it soon.",
+        'qna_answer_notification': """Your question has been answered:
+
+*Your Question*: {question}
+*Answer*: {answer}""",
+        # --- Migration Status ---
+        'migration_checklist_title': "📋 *Migration & Residency Checklist*\n\nThis is a general guide. Your steps may vary.",
+        # --- Points ---
+        'points_display': "🏆 You currently have *{points}* points. Keep participating to earn more!",
     },
     'it': {
         # Italian translations would go here
