@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "services": [
+    {
+      "id": "academic",
+      "name_fa": "مشاوره تحصیلی",
+      "name_en": "Academic Advising",
+      "slots": [
+        "Monday 10:00 - 11:00",
+        "Wednesday 14:00 - 15:00",
+        "Friday 11:00 - 12:00"
+      ]
+    },
+    {
+      "id": "visa",
+      "name_fa": "سوالات ویزا و اقامت",
+      "name_en": "Visa & Residency Questions",
+      "slots": [
+        "Tuesday 15:00 - 16:00",
+        "Thursday 10:00 - 11:00"
+      ]
+    },
+    {
+      "id": "general",
+      "name_fa": "مشاوره عمومی",
+      "name_en": "General Support",
+      "slots": [
+        "Monday 16:00 - 17:00",
+        "Wednesday 16:00 - 17:00"
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ from utils.redis_utils import redis_client
 from utils.gsheets import service as gsheets_service
 
 # --- Import Handlers ---
-from handlers import start_menu, register, isee, resources_hub, news, search, live_chat, weather, cost, language, profile, feedback, upload, discounts, simulation, consult, roommate
+from handlers import start_menu, register, isee, resources_hub, news, search, live_chat, weather, cost, language, profile, feedback, upload, discounts, simulation, consult, roommate, appointment, success_story
 # ... other handlers will be imported here as they are implemented
 
 # --- Logging ---
@@ -108,6 +108,12 @@ async def on_startup():
 
     # Add Roommate handler
     application.add_handler(roommate.roommate_conv_handler)
+
+    # Add Appointment handler
+    application.add_handler(appointment.appointment_conv_handler)
+
+    # Add Success Story handler
+    application.add_handler(success_story.success_story_conv_handler)
 
     # The generic button handler from start_menu should be one of the last,
     # to act as a fallback for buttons not handled by more specific handlers.

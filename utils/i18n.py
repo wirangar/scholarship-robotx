@@ -130,6 +130,32 @@ _{notes}_""",
         'roommate_error_saving': "هنگام ذخیره پروفایل شما خطایی رخ داد.",
         'roommate_search_wip': "🔍 بخش جستجوی هم‌اتاقی هنوز پیاده‌سازی نشده است. لطفاً بعداً دوباره سر بزنید!",
         'error_invalid_budget': "لطفاً برای بودجه یک عدد معتبر وارد کنید.",
+        'roommate_error_no_profile': "برای جستجو، ابتدا باید پروفایل هم‌اتاقی خود را با استفاده از دکمه 'ساخت پروفایل' ایجاد کنید.",
+        'roommate_no_matches': "متاسفانه هیچ مورد منطبقی با پروفایل شما یافت نشد.",
+        'roommate_no_more_matches': "مورد دیگری یافت نشد.",
+        'roommate_match_template': """*یک هم‌اتاقی بالقوه پیدا شد!*
+
+*درباره*: {bio}
+*بودجه*: €{budget}
+*مکان*: {location}
+*عادات*: {habits}
+
+*برای تماس*: `{contact}`""",
+        # --- Appointment Booking ---
+        'appt_select_service': "به بخش رزرو وقت خوش آمدید. لطفاً نوع خدمات مورد نظر خود را انتخاب کنید:",
+        'appt_select_slot': "عالی. لطفاً یک زمان آزاد را انتخاب کنید:",
+        'appt_confirm_booking': "شما زمان '{slot}' را انتخاب کردید. آیا این انتخاب را تایید می‌کنید؟",
+        'appt_success': "✅ وقت شما با موفقیت رزرو شد! در صورت نیاز با شما تماس خواهیم گرفت.",
+        'appt_canceled': "رزرو وقت لغو شد.",
+        'error_appointments_unavailable': "متاسفانه در حال حاضر امکان رزرو وقت وجود ندارد.",
+        'button_confirm': "✅ تایید",
+        'button_cancel': "❌ لغو",
+        # --- Success Story ---
+        'story_start': "ما دوست داریم داستان موفقیت شما را بشنویم! لطفاً داستان خود را در یک پیام بنویسید.",
+        'story_ask_photo': "عالی! آیا می‌خواهید یک عکس به داستان خود اضافه کنید؟",
+        'story_success': "✅ داستان شما با موفقیت ثبت شد و پس از بازبینی منتشر خواهد شد. متشکریم!",
+        'button_yes': "✅ بله",
+        'button_no': "❌ نه",
     },
     'en': {
         'welcome': "🇮🇹 Welcome to the Perugia Student and Immigrant Helper Bot!\n\nPlease register to access the features.",
@@ -256,6 +282,32 @@ _{notes}_""",
         'roommate_error_saving': "An error occurred while saving your profile.",
         'roommate_search_wip': "🔍 Roommate search is not yet implemented. Please check back later!",
         'error_invalid_budget': "Please enter a valid number for your budget.",
+        'roommate_error_no_profile': "To search, you first need to create your own roommate profile using the 'Create Profile' button.",
+        'roommate_no_matches': "Sorry, no suitable matches were found for your profile.",
+        'roommate_no_more_matches': "No more matches found.",
+        'roommate_match_template': """*Found a potential roommate!*
+
+*About*: {bio}
+*Budget*: €{budget}
+*Location*: {location}
+*Habits*: {habits}
+
+*To get in touch*: `{contact}`""",
+        # --- Appointment Booking ---
+        'appt_select_service': "Welcome to the appointment booking section. Please select the service you need:",
+        'appt_select_slot': "Great. Please select an available time slot:",
+        'appt_confirm_booking': "You selected the time slot '{slot}'. Do you confirm this choice?",
+        'appt_success': "✅ Your appointment has been successfully booked! We will contact you if needed.",
+        'appt_canceled': "Appointment booking canceled.",
+        'error_appointments_unavailable': "Sorry, appointment booking is currently unavailable.",
+        'button_confirm': "✅ Confirm",
+        'button_cancel': "❌ Cancel",
+        # --- Success Story ---
+        'story_start': "We'd love to hear your success story! Please write your story in a single message.",
+        'story_ask_photo': "Great! Would you like to add a photo to your story?",
+        'story_success': "✅ Your story has been successfully submitted and will be published after review. Thank you!",
+        'button_yes': "✅ Yes",
+        'button_no': "❌ No",
     },
     'it': {
         # Italian translations would go here
