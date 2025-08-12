@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "updated": "2024-05-20",
+  "cities": [
+    {
+      "city_id": "perugia",
+      "city_name_fa": "پروجا",
+      "city_name_en": "Perugia",
+      "costs": {
+        "rent_single_room_avg": 300,
+        "rent_shared_room_avg": 220,
+        "utilities_avg": 80,
+        "transport_pass": 35,
+        "groceries_monthly_avg": 250,
+        "eating_out_pizza": 12,
+        "aperitivo": 8,
+        "gym_monthly": 40
+      },
+      "notes_fa": "هزینه‌ها در پروجا نسبت به شهرهای بزرگ ایتالیا پایین‌تر است.",
+      "notes_en": "Costs in Perugia are generally lower than in major Italian cities."
+    },
+    {
+      "city_id": "bologna",
+      "city_name_fa": "بولونیا",
+      "city_name_en": "Bologna",
+      "costs": {
+        "rent_single_room_avg": 550,
+        "rent_shared_room_avg": 350,
+        "utilities_avg": 100,
+        "transport_pass": 36,
+        "groceries_monthly_avg": 300,
+        "eating_out_pizza": 15,
+        "aperitivo": 10,
+        "gym_monthly": 50
+      },
+      "notes_fa": "بولونیا یک شهر دانشجویی محبوب و گران‌تر است.",
+      "notes_en": "Bologna is a popular and more expensive student city."
+    },
+    {
+      "city_id": "rome",
+      "city_name_fa": "رم",
+      "city_name_en": "Rome",
+      "costs": {
+        "rent_single_room_avg": 650,
+        "rent_shared_room_avg": 400,
+        "utilities_avg": 120,
+        "transport_pass": 35,
+        "groceries_monthly_avg": 350,
+        "eating_out_pizza": 15,
+        "aperitivo": 12,
+        "gym_monthly": 60
+      },
+      "notes_fa": "پایتخت هزینه‌های بالاتری دارد، به خصوص در مسکن.",
+      "notes_en": "The capital has higher costs, especially for housing."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "residency",
+  "title_fa": "راهنمای کامل اقامت دانشجویی (Permesso di Soggiorno)",
+  "title_en": "Complete Guide to Student Residency Permit (Permesso di Soggiorno)",
+  "version": "1.1.0",
+  "sections": [
+    {
+      "id": "what_is_it",
+      "title_fa": "کارت اقامت چیست؟",
+      "title_en": "What is the Residency Permit?",
+      "content_fa": "کارت اقامت یا Permesso di Soggiorno مدرک قانونی شما برای زندگی در ایتالیا به عنوان یک غیراروپایی است. شما باید ظرف ۸ روز کاری پس از ورود به ایتالیا برای آن درخواست دهید.",
+      "content_en": "The Permesso di Soggiorno is your legal document to live in Italy as a non-EU citizen. You must apply for it within 8 working days of your arrival in Italy.",
+      "links": []
+    },
+    {
+      "id": "how_to_apply",
+      "title_fa": "چگونه درخواست دهیم؟ (Kit Postale)",
+      "title_en": "How to Apply (Poste Italiane Kit)",
+      "content_fa": "۱. به یک اداره پست (Poste Italiane) با تابلو Sportello Amico بروید.\n۲. کیت زرد (Kit Giallo) را درخواست کنید.\n۳. فرم‌ها را با دقت پر کنید (از یک CAF یا патронато می‌توانید کمک بگیرید).\n۴. مدارک لازم را ضمیمه کنید: کپی پاسپورت، ویزا، نامه پذیرش، بیمه درمانی و یک Marca da Bollo به ارزش ۱۶ یورو.",
+      "content_en": "1. Go to a Post Office (Poste Italiane) with a 'Sportello Amico' sign.\n2. Ask for the yellow kit ('Kit Giallo').\n3. Fill out the forms carefully (you can get help from a CAF or Patronato).\n4. Attach the required documents: copy of passport, visa, university acceptance letter, health insurance, and a €16 'Marca da Bollo' (revenue stamp).",
+      "links": [
+        {
+          "text_fa": "پیدا کردن نزدیک‌ترین اداره پست",
+          "text_en": "Find the nearest Post Office",
+          "url": "https://www.poste.it/cerca/index.html"
+        }
+      ]
+    },
+    {
+      "id": "fingerprints",
+      "title_fa": "وقت انگشت‌نگاری (Questura)",
+      "title_en": "Fingerprinting Appointment (Questura)",
+      "content_fa": "پس از تحویل کیت، اداره پست به شما یک رسید و وقت برای انگشت‌نگاری در اداره پلیس (Questura) می‌دهد. این وقت ممکن است چند ماه بعد باشد. رسید پستی شما تا زمان دریافت کارت اصلی، مدرک اقامت موقت شماست.",
+      "content_en": "After submitting the kit, the post office will give you a receipt and an appointment for fingerprinting at the police headquarters (Questura). This appointment might be several months later. Your postal receipt is your temporary permit until you receive the actual card.",
+      "links": []
+    }
+  ]
+}

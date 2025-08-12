@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "residency",
+      "title_fa": "اقامت (Permesso di Soggiorno)",
+      "title_en": "Residency Permit (Permesso di Soggiorno)",
+      "category": "legal",
+      "file": "residency.json",
+      "tags": ["permit", "visa", "questura", "اقامت", "پلیس"],
+      "updated": "2024-05-20"
+    },
+    {
+      "id": "housing",
+      "title_fa": "مسکن و خوابگاه",
+      "title_en": "Housing and Dormitories",
+      "category": "living",
+      "file": "housing.json",
+      "tags": ["rent", "dorm", "adisurc", "affitto", "خوابگاه", "اجاره"],
+      "updated": "2024-05-19"
+    },
+    {
+      "id": "healthcare",
+      "title_fa": "بیمه و خدمات درمانی",
+      "title_en": "Health Insurance and Services",
+      "category": "health",
+      "file": "healthcare.json",
+      "tags": ["tessera sanitaria", "asl", "guardia medica", "بیمه"],
+      "updated": "2024-05-21"
+    },
+    {
+      "id": "taxes_isee",
+      "title_fa": "مالیات و ISEE",
+      "title_en": "Taxes and ISEE",
+      "category": "finance",
+      "file": "taxes_isee.json",
+      "tags": ["codice fiscale", "isee", "caf", "مالیات", "کد مالیاتی"],
+      "updated": "2024-05-18"
+    }
+  ]
+}
