@@ -14,7 +14,10 @@ logger = get_logger(__name__)
 
 # --- Authentication and Service Setup ---
 
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/calendar'
+]
 
 creds = None
 if GOOGLE_CREDS:

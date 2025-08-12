@@ -45,6 +45,7 @@ GOOGLE_DRIVE_UPLOAD_FOLDER_ID = get_env_var("GOOGLE_DRIVE_UPLOAD_FOLDER_ID")
 SHEET_ID = get_env_var("SHEET_ID")
 SPREADSHEET_NAME = get_env_var("SPREADSHEET_NAME", default="PerugiaBotData")
 QUESTIONS_SHEET_NAME = get_env_var("QUESTIONS_SHEET_NAME", default="questions")
+GOOGLE_CALENDAR_ID = get_env_var("GOOGLE_CALENDAR_ID", required=False) # Optional for calendar features
 
 
 # --- Redis Configuration ---

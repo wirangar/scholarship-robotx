@@ -109,8 +109,31 @@ async def save_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
 # --- Search Flow ---
 
+def calculate_match_score(user_profile: dict, match_profile: dict) -> int:
+    """Calculates a compatibility score between two roommate profiles."""
+    score = 0
+
+    # 1. Budget Score (Max 50 points)
+    user_budget = user_profile['budget']
+    match_budget = match_profile['budget']
+    if abs(match_budget - user_budget) <= (user_budget * 0.1): # 10% range
+        score += 50
+    elif abs(match_budget - user_budget) <= (user_budget * 0.2): # 20% range
+        score += 25
+
+    # 2. Location Score (Max 30 points)
+    if user_profile['location'].lower() in match_profile['location'].lower() or \
+       match_profile['location'].lower() in user_profile['location'].lower():
+        score += 30
+
+    # 3. Habits Score (Max 20 points)
+    if user_profile['habits'].lower() == match_profile['habits'].lower():
+        score += 20
+
+    return score
+
 async def start_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Starts the search flow by fetching and displaying matches."""
+    """Starts the search flow by fetching, scoring, and displaying matches."""
     query = update.callback_query
     await query.answer()
 
@@ -121,33 +144,35 @@ async def start_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     user_profile_row = find_row_by_id('roommates', user.id)
     if not user_profile_row:
         await query.edit_message_text(get_text('roommate_error_no_profile', lang))
-        return ConversationHandler.END # Or redirect to profile creation
+        return ConversationHandler.END
 
-    user_budget = int(user_profile_row[2])
+    user_profile = {
+        'budget': int(user_profile_row[2]), 'location': user_profile_row[3], 'habits': user_profile_row[4]
+    }
 
     # 2. Get all profiles
     all_profiles = get_sheet_data('roommates')
 
-    # 3. Filter matches
+    # 3. Score and filter matches
     matches = []
     for profile in all_profiles:
-        # Skip header row or malformed rows
-        if not profile or str(profile[0]) == 'user_id':
-            continue
-        # Skip self
-        if str(profile[0]) == str(user.id):
+        if not profile or str(profile[0]) == 'user_id' or str(profile[0]) == str(user.id):
             continue
 
         try:
-            match_budget = int(profile[2])
-            # Budget match logic: +/- 20%
-            if abs(match_budget - user_budget) <= (user_budget * 0.2):
-                matches.append({
-                    'id': profile[0], 'username': profile[1], 'budget': profile[2],
-                    'location': profile[3], 'habits': profile[4], 'bio': profile[5]
-                })
+            match_profile_dict = {
+                'id': profile[0], 'username': profile[1], 'budget': int(profile[2]),
+                'location': profile[3], 'habits': profile[4], 'bio': profile[5]
+            }
+            score = calculate_match_score(user_profile, match_profile_dict)
+            if score > 0: # Only show profiles with some level of match
+                match_profile_dict['score'] = score
+                matches.append(match_profile_dict)
         except (ValueError, IndexError):
             continue
+
+    # 4. Sort by score
+    matches.sort(key=lambda x: x['score'], reverse=True)
 
     context.user_data['roommate_matches'] = matches
 
@@ -176,7 +201,8 @@ async def show_search_results(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     # Format the message
     contact = f"@{match['username']}" if match['username'] else f"User ID: {match['id']}"
-    text = get_text('roommate_match_template', lang).format(
+    text = get_text('roommate_match_template_scored', lang).format(
+        score=match['score'],
         bio=match['bio'],
         budget=match['budget'],
         location=match['location'],

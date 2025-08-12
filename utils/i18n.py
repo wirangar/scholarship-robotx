@@ -141,6 +141,15 @@ _{notes}_""",
 *عادات*: {habits}
 
 *برای تماس*: `{contact}`""",
+        'roommate_match_template_scored': """*یک هم‌اتاقی بالقوه پیدا شد!*
+*امتیاز تطابق*: {score}/100
+
+*درباره*: {bio}
+*بودجه*: €{budget}
+*مکان*: {location}
+*عادات*: {habits}
+
+*برای تماس*: `{contact}`""",
         # --- Appointment Booking ---
         'appt_select_service': "به بخش رزرو وقت خوش آمدید. لطفاً نوع خدمات مورد نظر خود را انتخاب کنید:",
         'appt_select_slot': "عالی. لطفاً یک زمان آزاد را انتخاب کنید:",
@@ -299,6 +308,15 @@ _{notes}_""",
         'roommate_no_matches': "Sorry, no suitable matches were found for your profile.",
         'roommate_no_more_matches': "No more matches found.",
         'roommate_match_template': """*Found a potential roommate!*
+
+*About*: {bio}
+*Budget*: €{budget}
+*Location*: {location}
+*Habits*: {habits}
+
+*To get in touch*: `{contact}`""",
+        'roommate_match_template_scored': """*Found a potential roommate!*
+*Match Score*: {score}/100
 
 *About*: {bio}
 *Budget*: €{budget}

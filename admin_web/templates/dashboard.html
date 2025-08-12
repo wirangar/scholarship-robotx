@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; background-color: #f4f4f9; color: #333; }
+        h1, h2 { color: #444; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 2em; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #e8e8f5; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <h2>Pending Questions ({{ pending_questions|length }})</h2>
+        {% if pending_questions %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Question</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in pending_questions %}
+                    <tr>
+                        <td>{{ q[0] }}</td>
+                        <td>{{ q[1] }}</td>
+                        <td>{{ q[2] }}</td>
+                        <td>Use <code>/answer {{ q[0] }} ...</code> in the bot.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No pending questions.</p>
+        {% endif %}
+
+        <h2>Pending Success Stories ({{ pending_stories|length }})</h2>
+        {% if pending_stories %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Story Text</th>
+                        <th>Photo ID</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in pending_stories %}
+                    <tr>
+                        <td>{{ s[0] }}</td>
+                        <td>{{ s[1] }}</td>
+                        <td>{{ s[3] }}</td>
+                        <td>{{ s[4] }}</td>
+                        <td>Use <code>/approve_story {{ s[0] }}</code> in the bot.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No pending success stories.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

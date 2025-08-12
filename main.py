@@ -18,6 +18,7 @@ from utils.gsheets import service as gsheets_service
 
 # --- Import Handlers ---
 from handlers import start_menu, register, isee, resources_hub, news, search, live_chat, weather, cost, language, profile, feedback, upload, discounts, simulation, consult, roommate, appointment, success_story, question, admin, migration_status, points
+from admin_web import routes as admin_routes
 # ... other handlers will be imported here as they are implemented
 
 # --- Logging ---
@@ -36,6 +37,10 @@ app = FastAPI(
     description="A Telegram bot to assist students and immigrants in Perugia.",
     version="1.0.0"
 )
+
+# Mount the admin web dashboard router
+app.include_router(admin_routes.router, prefix="/admin", tags=["Admin Dashboard"])
+
 
 # --- Webhook and Health Check Endpoints ---
 

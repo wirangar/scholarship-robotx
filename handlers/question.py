@@ -18,6 +18,7 @@ from utils.gates import require_registration
 from utils.gsheets import append_row, get_sheet_data
 from utils.i18n import get_text
 from utils.common import sanitize_markdown
+from utils.search_semantic import get_sentence_similarity_scores
 
 # --- Conversation States ---
 GET_QUESTION, HANDLE_SUGGESTIONS = range(2)
@@ -55,8 +56,25 @@ async def process_question(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     question_text = update.message.text
     context.user_data['user_question'] = question_text
 
-    # Search for similar questions
-    suggestions = search_faq(question_text)
+    # --- Semantic Search with Fallback ---
+    answered_questions = [row for row in get_sheet_data('questions') if len(row) >= 5 and row[4].lower() == 'answered']
+
+    suggestions = []
+    if answered_questions:
+        existing_q_texts = [row[2] for row in answered_questions]
+        scores = get_sentence_similarity_scores(question_text, existing_q_texts)
+
+        if scores:
+            # Semantic search succeeded
+            scored_questions = sorted(zip(scores, answered_questions), reverse=True)
+            # Get top 3 matches with a score > 0.6
+            suggestions = [
+                {'question': q[2], 'answer': q[3]}
+                for score, q in scored_questions if score > 0.6
+            ][:3]
+        else:
+            # Fallback to keyword search
+            suggestions = search_faq(question_text)
 
     if suggestions:
         context.user_data['qna_suggestions'] = suggestions
