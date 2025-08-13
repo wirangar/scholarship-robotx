@@ -5,6 +5,7 @@ Sets up the FastAPI server and the Telegram bot webhook.
 """
 import asyncio
 import uvicorn
+import datetime
 from fastapi import FastAPI, Request, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -21,6 +22,7 @@ from utils.gsheets import service as gsheets_service
 from handlers import start_menu, register, isee, resources_hub, news, search, live_chat, weather, cost, language, profile, feedback, upload, discounts, simulation, consult, roommate, appointment, success_story, question, admin, migration_status, points
 from admin_web import routes as admin_routes
 # ... other handlers will be imported here as they are implemented
+from utils import redis_utils
 
 # --- Logging ---
 logger = get_logger(__name__)
@@ -44,6 +46,34 @@ app.include_router(admin_routes.router, prefix="/admin", tags=["Admin Dashboard"
 app.mount("/admin/static", StaticFiles(directory="admin_web/static"), name="static")
 
 
+# --- Background Scheduler ---
+
+async def notification_scheduler():
+    """
+    A simple scheduler that runs in the background to process tasks from the Redis queue.
+    """
+    logger.info("Notification scheduler started.")
+    while True:
+        try:
+            now_ts = int(datetime.datetime.now().timestamp())
+            due_tasks = redis_utils.get_due_tasks(now_ts)
+
+            for task in due_tasks:
+                logger.info(f"Processing scheduled task: {task}")
+                try:
+                    user_id = task.get("user_id")
+                    message = task.get("message")
+                    if user_id and message:
+                        await application.bot.send_message(chat_id=user_id, text=message)
+                except Exception as e:
+                    logger.error(f"Failed to execute task {task}: {e}")
+
+        except Exception as e:
+            logger.error(f"Error in notification scheduler loop: {e}")
+
+        await asyncio.sleep(60) # Check every 60 seconds
+
+
 # --- Webhook and Health Check Endpoints ---
 
 @app.on_event("startup")
@@ -62,6 +92,9 @@ async def on_startup():
         logger.info(f"Webhook successfully set to {webhook_url}")
     except Exception as e:
         logger.error(f"Failed to set webhook: {e}")
+
+    # Start the background scheduler
+    asyncio.create_task(notification_scheduler())
 
     # Register handlers here
     application.add_handler(CommandHandler("start", start_menu.protected_start))

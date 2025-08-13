@@ -17,6 +17,7 @@ from utils.gates import require_registration, get_user_language
 from utils.gsheets import append_row
 from utils.i18n import get_text
 from utils.gcalendar import get_free_slots, book_appointment_slot
+from utils import redis_utils
 
 # --- Conversation States ---
 TIMESLOT, CONFIRMATION = range(2)
@@ -90,6 +91,22 @@ async def save_booking(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     if not booked_event:
         await query.edit_message_text(get_text('error_appointments_unavailable', lang))
         return ConversationHandler.END
+
+    # Schedule a reminder 24 hours before the appointment
+    try:
+        appointment_time_utc = parser.isoparse(booked_event['start']['dateTime'])
+        reminder_time_utc = appointment_time_utc - datetime.timedelta(hours=24)
+        reminder_timestamp = int(reminder_time_utc.timestamp())
+
+        # Ensure we don't schedule reminders for past events
+        if reminder_time_utc > datetime.datetime.now(datetime.timezone.utc):
+            reminder_task = {
+                "user_id": user.id,
+                "message": get_text('appt_reminder_24h', lang).format(slot=slot_str)
+            }
+            redis_utils.schedule_task(reminder_timestamp, reminder_task)
+    except Exception as e:
+        print(f"Failed to schedule reminder for user {user.id}: {e}") # Log and continue
 
     # Log to Google Sheets
     try:

@@ -82,8 +82,9 @@ async def test_migration_status_handler():
     assert "Apply for Residence Permit" in reply_text
 
 
-from handlers import isee
+from handlers import isee, appointment
 from telegram.ext import ConversationHandler
+from unittest.mock import ANY
 
 @pytest.mark.asyncio
 async def test_isee_conversation_flow():
@@ -160,3 +161,63 @@ async def test_isee_conversation_flow():
     assert next_state == ConversationHandler.END
     # Check that context was cleaned up
     assert 'isee_income' not in context.user_data
+
+
+@pytest.mark.asyncio
+async def test_appointment_reminder_scheduling():
+    """
+    Tests that a reminder is correctly scheduled when an appointment is booked.
+    """
+    # 1. Setup
+    user = MockUser(user_id=789, full_name="Reminder User")
+    context = MockContext()
+
+    # Mock the return value for a booked GCal event
+    booked_event_mock = {
+        'start': {'dateTime': '2025-10-27T10:00:00Z'},
+        'htmlLink': 'http://dummy.cal.link'
+    }
+
+    # Mock the dependencies
+    with patch('handlers.appointment.book_appointment_slot') as mock_book, \
+         patch('handlers.appointment.append_row') as mock_append, \
+         patch('handlers.appointment.redis_utils.schedule_task') as mock_schedule:
+
+        mock_book.return_value = booked_event_mock
+
+        # Simulate the state where the user has already selected a slot
+        context.user_data['appt_event_id'] = 'dummy_event_id'
+        context.user_data['appt_slot_str'] = 'Monday, Oct 27 @ 10:00'
+        context.user_data['language'] = 'en'
+
+        # Create a mock callback query update
+        query_mock = AsyncMock()
+        update = MagicMock()
+        update.effective_user = user
+        update.callback_query = query_mock
+
+        # 2. Call the final function in the conversation
+        await appointment.save_booking(update, context)
+
+        # 3. Assertions
+        # Check that the booking was saved
+        mock_append.assert_called_once()
+
+        # Check that the reminder was scheduled
+        mock_schedule.assert_called_once()
+
+        # Check the arguments of the scheduled task
+        args, kwargs = mock_schedule.call_args
+        reminder_timestamp = args[0]
+        reminder_task = args[1]
+
+        # Calculate the expected timestamp dynamically to avoid timezone issues in testing
+        from dateutil import parser
+        import datetime
+        appointment_time = parser.isoparse(booked_event_mock['start']['dateTime'])
+        expected_reminder_time = appointment_time - datetime.timedelta(hours=24)
+        expected_timestamp = int(expected_reminder_time.timestamp())
+
+        assert reminder_timestamp == expected_timestamp
+        assert reminder_task['user_id'] == 789
+        assert "Reminder: You have an advising appointment tomorrow" in reminder_task['message']
