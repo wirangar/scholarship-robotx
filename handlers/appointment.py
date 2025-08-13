@@ -13,7 +13,7 @@ from telegram.ext import (
 )
 from dateutil import parser
 
-from utils.gates import require_registration
+from utils.gates import require_registration, get_user_language
 from utils.gsheets import append_row
 from utils.i18n import get_text
 from utils.gcalendar import get_free_slots, book_appointment_slot
@@ -137,6 +137,3 @@ appointment_conv_handler = ConversationHandler(
     },
     fallbacks=[CommandHandler('cancel', cancel_booking)],
 )
-
-def get_user_language(user_id: int, context: ContextTypes.DEFAULT_TYPE) -> str:
-    return context.user_data.get('language', 'fa')

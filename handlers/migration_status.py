@@ -6,7 +6,7 @@ Displays a static checklist for the immigration process.
 from telegram import Update
 from telegram.ext import ContextTypes, CommandHandler
 
-from utils.gates import require_registration
+from utils.gates import require_registration, get_user_language
 from utils.i18n import get_text
 from utils.common import sanitize_markdown
 
@@ -45,8 +45,3 @@ async def show_migration_status(update: Update, context: ContextTypes.DEFAULT_TY
         text += f"\n{status} {sanitize_markdown(item)}"
 
     await update.message.reply_text(text, parse_mode='MarkdownV2')
-
-
-# This is a helper function that should be in utils/gates.py, but is duplicated here for simplicity
-def get_user_language(user_id: int, context: ContextTypes.DEFAULT_TYPE) -> str:
-    return context.user_data.get('language', 'fa')
