@@ -54,6 +54,9 @@ REDIS_URL = get_env_var("REDIS_URL")
 # --- Application Settings ---
 PORT = int(get_env_var("PORT", default="8000"))
 LOG_LEVEL = get_env_var("LOG_LEVEL", default="INFO").upper()
+DATABASE_URL = get_env_var("DATABASE_URL")
+ADMIN_USER = get_env_var("ADMIN_USER", required=False, default="admin")
+ADMIN_PASSWORD = get_env_var("ADMIN_PASSWORD", required=False, default="password")
 
 # --- ISEE Calculation Constants ---
 ISEE_THRESHOLD = 23000.0

@@ -5,8 +5,10 @@ Decorators for access control and state checking (gates).
 from functools import wraps
 from telegram import Update
 from telegram.ext import ContextTypes
+from sqlalchemy.orm import Session
 
-from utils.gsheets import find_row_by_id
+from utils.database import SessionLocal
+from utils.models import User
 from utils.i18n import get_text
 
 # In-memory cache for user registration status to reduce GSheet lookups
@@ -24,7 +26,7 @@ def get_user_language(user_id: int, context: ContextTypes.DEFAULT_TYPE) -> str:
 def require_registration(func):
     """
     A decorator that checks if a user is registered before allowing access to a command.
-    It checks for the user's Telegram ID in the 'users' sheet.
+    It checks for the user's Telegram ID in the database.
     """
     @wraps(func)
     async def wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE, *args, **kwargs):
@@ -36,21 +38,28 @@ def require_registration(func):
         if user.id in _user_registration_cache and _user_registration_cache[user.id]:
             return await func(update, context, *args, **kwargs)
 
-        # 2. If not in cache, check Google Sheets
-        user_profile = find_row_by_id('users', user.id, id_column_index=0)
+        # 2. If not in cache, check the database
+        db: Session = next(SessionLocal())
+        try:
+            db_user = db.query(User).filter(User.id == user.id).first()
+        finally:
+            db.close()
 
-        if user_profile:
+        if db_user:
             # Cache the positive result
             _user_registration_cache[user.id] = True
             # Store language preference from profile
-            # Assuming language is in column 6 (index 5) of the 'users' sheet
-            if len(user_profile) > 5:
-                context.user_data['language'] = user_profile[5]
+            context.user_data['language'] = db_user.language
             return await func(update, context, *args, **kwargs)
         else:
             # User is not registered
             lang = get_user_language(user.id, context)
-            await update.message.reply_text(get_text('register_prompt', lang))
+            # This logic might need adjustment if the message is from a callback query
+            if update.message:
+                await update.message.reply_text(get_text('register_prompt', lang))
+            elif update.callback_query:
+                await update.callback_query.edit_message_text(get_text('register_prompt', lang))
+                await update.callback_query.answer()
             return
 
     return wrapper

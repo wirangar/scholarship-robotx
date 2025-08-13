@@ -54,12 +54,19 @@ async def test_migration_status_handler():
     context.user_data['language'] = 'en' # Explicitly set language for the test
 
     # 2. Make the user "registered" for the @require_registration gate
-    # We patch the gate's dependency and the handler's language function
-    with patch('utils.gates.find_row_by_id') as mock_find, \
-         patch('handlers.migration_status.get_user_language') as mock_lang:
+    # Force all text to be English for this test to isolate the issue
+    def get_english_text(key, lang='en'):
+        from utils.i18n import MESSAGES
+        return MESSAGES['en'].get(key, key)
 
-        mock_find.return_value = ['123', 'Test User', '30', 'Testland', 'CS', 'test@test.com', 'en']
-        mock_lang.return_value = 'en'
+    # We now need to mock the database query in the gate
+    with patch('utils.gates.SessionLocal') as mock_session_local, \
+         patch('handlers.migration_status.get_text', new=get_english_text):
+        mock_session = MagicMock()
+        mock_user_instance = MagicMock()
+        mock_user_instance.language = 'en'
+        mock_session.query.return_value.filter.return_value.first.return_value = mock_user_instance
+        mock_session_local.return_value = mock_session
 
         # 3. Call the handler
         await migration_status.show_migration_status(update, context)
@@ -92,13 +99,19 @@ async def test_isee_conversation_flow():
     message1 = MockMessage("/isee", user)
     update1 = MockUpdate(message1)
 
-    # Patch dependencies for the gate and the language function for the whole test
-    with patch('utils.gates.find_row_by_id') as mock_find, \
-         patch('handlers.isee.get_user_language') as mock_lang:
+    # Force all text to be English for this test to isolate the issue
+    def get_english_text(key, lang='en'):
+        from utils.i18n import MESSAGES
+        return MESSAGES['en'].get(key, key)
 
-        # Setup the mocks' return values
-        mock_find.return_value = ['456', 'Isee User', '25', 'Testland', 'Econ', 'isee@test.com', 'en']
-        mock_lang.return_value = 'en'
+    with patch('handlers.isee.get_text', new=get_english_text), \
+         patch('utils.gates.SessionLocal') as mock_session_local:
+
+        mock_session = MagicMock()
+        mock_user_instance = MagicMock()
+        mock_user_instance.language = 'en'
+        mock_session.query.return_value.filter.return_value.first.return_value = mock_user_instance
+        mock_session_local.return_value = mock_session
 
         # --- Step 1: Start the conversation ---
         next_state = await isee.start_isee_conversation(update1, context)

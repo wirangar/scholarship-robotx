@@ -12,11 +12,22 @@ from telegram.ext import (
     filters,
 )
 
+from telegram import Update, ReplyKeyboardRemove
+from telegram.ext import (
+    ContextTypes,
+    ConversationHandler,
+    CommandHandler,
+    MessageHandler,
+    filters,
+)
+from sqlalchemy.orm import Session
+
 from utils.i18n import get_text
 from utils.logger import get_logger
-from utils.gsheets import append_row, find_row_by_id
 from utils.common import is_valid_email, is_valid_age
 from handlers.start_menu import protected_start
+from utils.database import SessionLocal
+from utils.models import User
 
 logger = get_logger(__name__)
 
@@ -26,13 +37,17 @@ NAME, AGE, COUNTRY, MAJOR, EMAIL = range(5)
 async def start_registration(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """
     Starts the registration conversation.
-    Checks if the user is already registered.
+    Checks if the user is already registered in the database.
     """
     user = update.effective_user
     lang = context.user_data.get('language', 'fa')
+    db: Session = next(SessionLocal())
+    try:
+        db_user = db.query(User).filter(User.id == user.id).first()
+    finally:
+        db.close()
 
-    # Check if user is already registered
-    if find_row_by_id('users', user.id):
+    if db_user:
         await update.message.reply_text("You are already registered.")
         await protected_start(update, context)
         return ConversationHandler.END
@@ -92,21 +107,22 @@ async def complete_registration(update: Update, context: ContextTypes.DEFAULT_TY
 
     context.user_data['registration_email'] = user_input
 
-    # --- Save data to Google Sheets ---
-    user_data = [
-        user.id,
-        context.user_data['registration_name'],
-        context.user_data['registration_age'],
-        context.user_data['registration_country'],
-        context.user_data['registration_major'],
-        context.user_data['registration_email'],
-        lang, # Save preferred language
-        # Add other fields like notification preferences here
-    ]
-
+    # --- Save data to the database ---
+    db: Session = next(SessionLocal())
     try:
-        append_row('users', user_data)
-        logger.info(f"New user registered: {user.id} - {user_data[1]}")
+        new_user = User(
+            id=user.id,
+            full_name=context.user_data['registration_name'],
+            age=context.user_data['registration_age'],
+            country=context.user_data['registration_country'],
+            major=context.user_data['registration_major'],
+            email=context.user_data['registration_email'],
+            language=lang,
+        )
+        db.add(new_user)
+        db.commit()
+
+        logger.info(f"New user registered: {user.id} - {new_user.full_name}")
         await update.message.reply_text(get_text('registration_success', lang), reply_markup=ReplyKeyboardRemove())
 
         # Clean up temporary data
@@ -118,8 +134,11 @@ async def complete_registration(update: Update, context: ContextTypes.DEFAULT_TY
         return ConversationHandler.END
 
     except Exception as e:
-        logger.error(f"Failed to save user {user.id} to Google Sheets: {e}")
+        logger.error(f"Failed to save user {user.id} to database: {e}")
+        db.rollback()
         await update.message.reply_text(get_text('error_general', lang), reply_markup=ReplyKeyboardRemove())
+    finally:
+        db.close()
         return ConversationHandler.END
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:

@@ -14,8 +14,10 @@ from telegram.ext import (
 )
 
 from utils.gates import require_registration
-from utils.gsheets import append_row, find_row_by_id, get_sheet_data, update_row
 from utils.i18n import get_text
+from sqlalchemy.orm import Session
+from utils.database import SessionLocal
+from utils.models import RoommateProfile
 
 # --- Conversation States ---
 MENU, CREATE_BUDGET, CREATE_LOCATION, CREATE_HABITS, CREATE_BIO, SEARCH = range(6)
@@ -82,24 +84,39 @@ async def save_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         context.user_data['roommate_bio']
     ]
 
-    # Check if user already has a profile to update it, otherwise create a new one.
-    all_roommates = get_sheet_data('roommates')
-    row_index = -1
-    for i, row in enumerate(all_roommates):
-        if len(row) > 0 and str(row[0]) == str(user.id):
-            row_index = i + 1 # Google Sheets are 1-indexed
-            break
-
+    db: Session = next(SessionLocal())
     try:
-        if row_index != -1:
-            update_row('roommates', row_index, profile_data)
-        else:
-            append_row('roommates', profile_data)
+        # Check if a profile already exists
+        existing_profile = db.query(RoommateProfile).filter(RoommateProfile.user_id == user.id).first()
 
+        if existing_profile:
+            # Update existing profile
+            existing_profile.username = user.username or ""
+            existing_profile.budget = context.user_data['roommate_budget']
+            existing_profile.location = context.user_data['roommate_location']
+            existing_profile.habits = context.user_data['roommate_habits']
+            existing_profile.bio = context.user_data['roommate_bio']
+        else:
+            # Create new profile
+            new_profile = RoommateProfile(
+                user_id=user.id,
+                username=user.username or "",
+                budget=context.user_data['roommate_budget'],
+                location=context.user_data['roommate_location'],
+                habits=context.user_data['roommate_habits'],
+                bio=context.user_data['roommate_bio'],
+            )
+            db.add(new_profile)
+
+        db.commit()
         await update.message.reply_text(get_text('roommate_profile_saved', lang))
+
     except Exception as e:
         print(f"Failed to save roommate profile for {user.id}: {e}")
+        db.rollback()
         await update.message.reply_text(get_text('roommate_error_saving', lang))
+    finally:
+        db.close()
 
     # Cleanup
     for key in [k for k in context.user_data if k.startswith('roommate_')]:
@@ -140,36 +157,34 @@ async def start_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     user = update.effective_user
     lang = get_user_language(user.id, context)
 
-    # 1. Check if the user has a profile
-    user_profile_row = find_row_by_id('roommates', user.id)
-    if not user_profile_row:
-        await query.edit_message_text(get_text('roommate_error_no_profile', lang))
-        return ConversationHandler.END
+    db: Session = next(SessionLocal())
+    try:
+        # 1. Check if the user has a profile
+        user_profile = db.query(RoommateProfile).filter(RoommateProfile.user_id == user.id).first()
+        if not user_profile:
+            await query.edit_message_text(get_text('roommate_error_no_profile', lang))
+            return ConversationHandler.END
 
-    user_profile = {
-        'budget': int(user_profile_row[2]), 'location': user_profile_row[3], 'habits': user_profile_row[4]
-    }
+        user_profile_dict = {
+            'budget': user_profile.budget, 'location': user_profile.location, 'habits': user_profile.habits
+        }
 
-    # 2. Get all profiles
-    all_profiles = get_sheet_data('roommates')
+        # 2. Get all other profiles
+        all_profiles = db.query(RoommateProfile).filter(RoommateProfile.user_id != user.id).all()
 
-    # 3. Score and filter matches
-    matches = []
-    for profile in all_profiles:
-        if not profile or str(profile[0]) == 'user_id' or str(profile[0]) == str(user.id):
-            continue
-
-        try:
+        # 3. Score and filter matches
+        matches = []
+        for profile in all_profiles:
             match_profile_dict = {
-                'id': profile[0], 'username': profile[1], 'budget': int(profile[2]),
-                'location': profile[3], 'habits': profile[4], 'bio': profile[5]
+                'id': profile.user_id, 'username': profile.username, 'budget': profile.budget,
+                'location': profile.location, 'habits': profile.habits, 'bio': profile.bio
             }
-            score = calculate_match_score(user_profile, match_profile_dict)
-            if score > 0: # Only show profiles with some level of match
+            score = calculate_match_score(user_profile_dict, match_profile_dict)
+            if score > 0:
                 match_profile_dict['score'] = score
                 matches.append(match_profile_dict)
-        except (ValueError, IndexError):
-            continue
+    finally:
+        db.close()
 
     # 4. Sort by score
     matches.sort(key=lambda x: x['score'], reverse=True)

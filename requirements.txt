@@ -26,3 +26,7 @@ feedparser==6.0.11
 # Testing
 pytest==8.2.0
 pytest-asyncio==0.23.6
+
+# Database
+SQLAlchemy==2.0.29
+psycopg2-binary==2.9.9
