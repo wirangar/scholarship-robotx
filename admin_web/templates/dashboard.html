@@ -4,29 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <style>
-        body { font-family: sans-serif; margin: 2em; background-color: #f4f4f9; color: #333; }
-        h1, h2 { color: #444; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 2em; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #e8e8f5; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .container { max-width: 1200px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    </style>
+    <link rel="stylesheet" href="/admin/static/css/dashboard.css">
 </head>
 <body>
     <div class="container">
         <h1>Admin Dashboard</h1>
 
         <h2>Pending Questions ({{ pending_questions|length }})</h2>
+        <input type="text" id="question-search" onkeyup="filterTable('question-search', 'question-table')" placeholder="Search questions...">
         {% if pending_questions %}
-            <table>
+            <table id="question-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>User ID</th>
                         <th>Question</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +28,10 @@
                         <td>{{ q[0] }}</td>
                         <td>{{ q[1] }}</td>
                         <td>{{ q[2] }}</td>
-                        <td>Use <code>/answer {{ q[0] }} ...</code> in the bot.</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="openAnswerModal('{{ q[0] }}', '{{ q[2]|escapejs }}')">Answer</button>
+                            <button class="btn btn-danger" onclick="deleteQuestion('{{ q[0] }}')">Delete</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -45,15 +41,16 @@
         {% endif %}
 
         <h2>Pending Success Stories ({{ pending_stories|length }})</h2>
+        <input type="text" id="story-search" onkeyup="filterTable('story-search', 'story-table')" placeholder="Search stories...">
         {% if pending_stories %}
-            <table>
+            <table id="story-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>User ID</th>
                         <th>Story Text</th>
                         <th>Photo ID</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +60,10 @@
                         <td>{{ s[1] }}</td>
                         <td>{{ s[3] }}</td>
                         <td>{{ s[4] }}</td>
-                        <td>Use <code>/approve_story {{ s[0] }}</code> in the bot.</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="approveStory('{{ s[0] }}')">Approve</button>
+                            <button class="btn btn-danger" onclick="deleteStory('{{ s[0] }}')">Delete</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -72,5 +72,21 @@
             <p>No pending success stories.</p>
         {% endif %}
     </div>
+
+    <!-- The Modal -->
+    <div id="answer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Answer Question</h2>
+            <p><strong>Question:</strong> <span id="modal-question-text"></span></p>
+            <form id="answer-form">
+                <input type="hidden" id="question-id-field" name="question_id">
+                <textarea id="answer-textarea" name="answer_text" placeholder="Type your answer here..." required></textarea>
+                <button type="submit" class="btn btn-primary">Submit Answer</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin/static/js/dashboard.js"></script>
 </body>
 </html>

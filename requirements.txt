@@ -1,5 +1,24 @@
-python-telegram-bot
-python-dotenv
-psycopg2-binary
-fastapi
-uvicorn[standard]
+# Telegram Bot and Web Framework
+python-telegram-bot[ext]==21.2
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+Jinja2==3.1.4
+
+# APIs and HTTP Requests
+requests==2.31.0
+python-dateutil==2.9.0 # For parsing datetimes from GCal
+
+# Google Services
+google-api-python-client==2.126.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.0
+
+# Database and Caching
+redis==5.0.4
+
+# Utilities
+python-dotenv==1.0.1
+cryptography==42.0.5
+reportlab==4.1.0
+feedparser==6.0.11

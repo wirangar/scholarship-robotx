@@ -6,6 +6,7 @@ Sets up the FastAPI server and the Telegram bot webhook.
 import asyncio
 import uvicorn
 from fastapi import FastAPI, Request, Response
+from fastapi.staticfiles import StaticFiles
 
 import telegram
 from telegram import Update
@@ -40,6 +41,7 @@ app = FastAPI(
 
 # Mount the admin web dashboard router
 app.include_router(admin_routes.router, prefix="/admin", tags=["Admin Dashboard"])
+app.mount("/admin/static", StaticFiles(directory="admin_web/static"), name="static")
 
 
 # --- Webhook and Health Check Endpoints ---
