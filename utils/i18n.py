@@ -356,10 +356,324 @@ _{notes}_""",
         'points_display': "🏆 You currently have *{points}* points. Keep participating to earn more!",
     },
     'it': {
-        # Italian translations would go here
+        'welcome': "🇮🇹 Benvenuto nel Bot di Aiuto per Studenti e Immigrati a Perugia!\n\nPer favore, registrati per accedere alle funzionalità.",
+        'main_menu_title': "Menu Principale:",
+        'register_prompt': "Per usare il bot, per favore registrati con il comando /register.",
+        'error_general': "Si è verificato un errore. Per favore, riprova o contatta l'amministratore.",
+        'invalid_input': "Input non valido. Per favore, riprova.",
+        'registration_success': "✅ La tua registrazione è stata completata con successo!",
+        'button_register': "📝 Registrati",
+        'button_main_menu': "🏠 Menu Principale",
+        'button_back': "➡️ Indietro",
+        'button_res_hub': "📚 Centro Risorse",
+        'button_scholarships': "🎓 Borse di Studio",
+        'button_isee': "📊 Calcolatore ISEE",
+        'button_weather': "🌦 Meteo",
+        'button_news': "📰 Notizie",
+        'button_fx': "💱 Cambio Valuta",
+        'button_profile': "👤 Profilo",
+        'button_roommate': "👥 Coinquilino",
+        'button_live_chat': "💬 Chat con Admin",
+        'register_ask_name': "Per favore, inserisci il tuo nome completo:",
+        'register_ask_age': "Per favore, inserisci la tua età (tra 16 e 100):",
+        'register_ask_country': "Per favore, inserisci il tuo paese:",
+        'register_ask_major': "Per favore, inserisci il tuo corso di studi:",
+        'register_ask_email': "Per favore, inserisci la tua email:",
+        'isee_intro': "Questo è un simulatore educativo per il calcolo dell'ISEE. I risultati potrebbero non essere esatti.",
+        'isee_ask_income': "Per favore, inserisci il reddito annuo della tua famiglia in EUR:",
+        'isee_ask_property': "Per favore, inserisci la dimensione totale delle proprietà della tua famiglia in metri quadrati (0 se nessuna):",
+        'isee_ask_family': "Quanti membri ci sono nella tua famiglia?",
+        'isee_result': "📊 Risultato Calcolo ISEE:\n\n- Il tuo valore ISEE: `{isee_value:.2f}`\n- Stato Borsa di Studio: `{status}`",
+        'isee_status_full': "Completa",
+        'isee_status_partial': "Parziale",
+        'isee_status_none': "Non idoneo",
+        'cost_select_city': "Per favore, seleziona una città per vedere il costo della vita stimato:",
+        'error_cost_data_unavailable': "Spiacenti, i dati sul costo della vita non sono attualmente disponibili.",
+        'error_city_not_found': "Spiacenti, le informazioni per questa città non sono state trovate.",
+        'button_back_to_cities': "⬅️ Torna alla Lista Città",
+        'cost_details_template': """💰 *Costi Mensili Stimati a {city_name}*
+
+🏠 *Alloggio*:
+  - Stanza Singola: *~€{rent_single}*
+  - Stanza Condivisa: *~€{rent_shared}*
+  - Utenze: *~€{utilities}*
+
+🚌 *Stile di Vita*:
+  - Abbonamento Trasporti: *€{transport}*
+  - Spesa: *~€{groceries}*
+  - Pizza Fuori: *€{pizza}*
+
+_{notes}_""",
+        'discounts_title': "💸 *Sconti per Studenti*\n\n",
+        'error_discounts_unavailable': "Spiacenti, le informazioni sugli sconti non sono attualmente disponibili.",
+        'error_no_more_discounts': "Nessun altro sconto trovato.",
+        'button_previous': "⬅️ Precedente",
+        'button_next': "➡️ Successivo",
+        'language_select_category': "Per favore, seleziona una categoria per imparare alcune frasi in italiano:",
+        'error_language_unavailable': "Spiacenti, le lezioni di lingua non sono attualmente disponibili.",
+        'error_category_not_found': "Categoria non trovata.",
+        'button_back_to_categories': "⬅️ Torna alle Categorie",
+        'upload_prompt': "Per favore, invia il file che desideri caricare (es. PDF, JPG, PNG).\nDimensione massima: 10 MB.\n\nDigita /cancel per annullare.",
+        'upload_processing': "Elaborazione del tuo file, attendere prego...",
+        'upload_success': "✅ Il tuo file è stato caricato con successo e in modo sicuro!",
+        'upload_canceled': "Caricamento annullato.",
+        'error_upload_no_file': "Questo non sembra essere un file. Per favore, invia un documento o una foto.",
+        'error_upload_too_large': "Il file è troppo grande. Per favore, invia un file più piccolo di 10 MB.",
+        'error_upload_mime_type': "Il tipo di file '{mime_type}' non è supportato.",
+        'error_upload_telegram_download': "Spiacenti, si è verificato un errore durante il download del file dai server di Telegram.",
+        'error_upload_drive': "Spiacenti, si è verificato un errore durante il caricamento del file sul nostro storage.",
+        'error_upload_log_failed': "Il tuo file è stato caricato, ma si è verificato un errore nel nostro sistema. Per favore, contatta un admin.",
+        'weather_prompt': "Per favore, inserisci il nome di una città o usa l'opzione predefinita qui sotto.",
+        'weather_button_perugia': "🌦 Meteo a Perugia",
+        'error_invalid_city': "Nome della città non valido. Per favore, riprova.",
+        'error_weather_unavailable': "Spiacenti, il servizio meteo non è attualmente disponibile.",
+        'error_weather_city_not_found': "Spiacenti, non sono riuscito a trovare la città '{city}'. Per favore, controlla l'ortografia e riprova.",
+        'weather_details_template': """{emoji} *Meteo a {city}*
+
+*{description}*
+🌡️ Temperatura: *{temp:.1f}°C*
+🤔 Percepita: *{feels_like:.1f}°C*
+💧 Umidità: *{humidity}%*
+💨 Vento: *{wind_speed:.1f} m/s*""",
+        'sim_select_city': "Simulatore di Budget: Per favore, seleziona una città.",
+        'sim_ask_housing': "Che tipo di alloggio preferisci?",
+        'sim_housing_single': "Stanza Singola",
+        'sim_housing_shared': "Stanza Condivisa",
+        'sim_ask_lifestyle': "Come descriveresti il tuo stile di vita e le tue abitudini di svago?",
+        'sim_results_template': """✅ *Risultati Simulazione Budget Mensile*
+
+- Affitto: *€{rent}*
+- Utenze (acqua, luce, ...): *€{utilities}*
+- Trasporti: *€{transport}*
+- Spesa: *€{groceries}*
+- Svago e Altro: *€{leisure}*
+
+- *Totale Stimato: €{total}*""",
+        'consult_start': "Benvenuto al servizio di Consulenza Accademica.\nTi faremo alcune domande per capire il tuo profilo.\n\nInnanzitutto, qual è il tuo campo di studi previsto?",
+        'consult_ask_gpa': "Qual è la tua media attuale (GPA)? Per favore, specifica la scala.",
+        'consult_ask_budget': "Qual è il tuo budget annuale stimato per studiare in EUR?",
+        'consult_ask_language': "Qual è il tuo attuale livello di competenza linguistica in italiano o inglese (es. B1, IELTS 6.5)?",
+        'consult_ask_cv': "Infine, per favore carica il tuo CV o resume come file PDF o DOCX.",
+        'consult_uploading_cv': "Caricamento del tuo CV in corso, attendere prego...",
+        'consult_error_cv_upload': "Si è verificato un errore durante il caricamento del tuo CV. Per favore, riprova o contatta un admin.",
+        'consult_error_cv_format': "Questo non sembra un file CV valido. Per favore, invia un documento PDF o DOCX.",
+        'consult_success': "✅ Grazie! La tua richiesta di consulenza è stata inviata. Ti risponderemo presto.",
+        'consult_error_saving': "Si è verificato un errore durante il salvataggio della tua richiesta. Per favore, contatta un admin.",
+        'roommate_welcome': "Benvenuto nel Trovatore di Coinquilini! Cosa vorresti fare?",
+        'roommate_button_create': "📝 Crea / Aggiorna Profilo",
+        'roommate_button_search': "🔍 Cerca Coinquilini",
+        'roommate_create_start': "Creiamo il tuo profilo da coinquilino.\n\nQual è il tuo budget mensile per l'affitto in EUR?",
+        'roommate_ask_location': "In quale zona stai cercando casa? (es. Centro, Elce)",
+        'roommate_ask_habits': "Sei una persona più tranquilla o socievole in casa? (Tranquilla/Socievole)",
+        'roommate_ask_bio': "Ottimo! Infine, scrivi una breve biografia su di te (es. i tuoi hobby, cosa studi).",
+        'roommate_profile_saved': "✅ Il tuo profilo da coinquilino è stato salvato con successo!",
+        'roommate_error_saving': "Si è verificato un errore durante il salvataggio del tuo profilo.",
+        'roommate_search_wip': "🔍 La ricerca di coinquilini non è ancora implementata. Per favore, torna più tardi!",
+        'error_invalid_budget': "Per favore, inserisci un numero valido per il tuo budget.",
+        'roommate_error_no_profile': "Per cercare, devi prima creare il tuo profilo da coinquilino usando il pulsante 'Crea Profilo'.",
+        'roommate_no_matches': "Spiacenti, non sono stati trovati coinquilini adatti al tuo profilo.",
+        'roommate_no_more_matches': "Nessun altro risultato trovato.",
+        'roommate_match_template': """*Trovato un potenziale coinquilino!*
+
+*Su di lui/lei*: {bio}
+*Budget*: €{budget}
+*Zona*: {location}
+*Abitudini*: {habits}
+
+*Per contattarlo/a*: `{contact}`""",
+        'roommate_match_template_scored': """*Trovato un potenziale coinquilino!*
+*Punteggio di Compatibilità*: {score}/100
+
+*Su di lui/lei*: {bio}
+*Budget*: €{budget}
+*Zona*: {location}
+*Abitudini*: {habits}
+
+*Per contattarlo/a*: `{contact}`""",
+        'appt_select_service': "Benvenuto nella sezione prenotazione appuntamenti. Per favore, seleziona il servizio di cui hai bisogno:",
+        'appt_select_slot': "Ottimo. Per favore, seleziona uno slot orario disponibile:",
+        'appt_confirm_booking': "Hai selezionato lo slot '{slot}'. Confermi questa scelta?",
+        'appt_success': "✅ Il tuo appuntamento è stato prenotato con successo! Ti contatteremo se necessario.",
+        'appt_canceled': "Prenotazione appuntamento annullata.",
+        'error_appointments_unavailable': "Spiacenti, la prenotazione di appuntamenti non è attualmente disponibile.",
+        'button_confirm': "✅ Conferma",
+        'button_cancel': "❌ Annulla",
+        'appt_reminder_24h': "🔔 Promemoria: Hai un appuntamento di consulenza domani alle {slot}.",
+        'story_start': "Ci piacerebbe sentire la tua storia di successo! Per favore, scrivi la tua storia in un unico messaggio.",
+        'story_ask_photo': "Ottimo! Vorresti aggiungere una foto alla tua storia?",
+        'story_success': "✅ La tua storia è stata inviata con successo e sarà pubblicata dopo una revisione. Grazie!",
+        'button_yes': "✅ Sì",
+        'button_no': "❌ No",
+        'qna_ask_question': "Scrivi la tua domanda. Cercheremo prima nelle nostre FAQ.",
+        'qna_suggestions_found': "Abbiamo trovato alcune domande simili. La tua risposta è qui?\nIn caso contrario, premi il pulsante qui sotto per inviare la tua domanda.",
+        'qna_submit_anyway': "Questa non è la mia domanda, inviala",
+        'qna_success': "✅ La tua domanda è stata inviata con successo. Gli amministratori risponderanno presto.",
+        'qna_answer_notification': """La tua domanda ha ricevuto una risposta:
+
+*La tua Domanda*: {question}
+*Risposta*: {answer}""",
+        'migration_checklist_title': "📋 *Checklist per Immigrazione e Residenza*\n\nQuesta è una guida generale. I tuoi passaggi potrebbero variare.",
+        'points_display': "🏆 Attualmente hai *{points}* punti. Continua a partecipare per guadagnarne di più!",
     },
     'ar': {
-        # Arabic translations would go here
+        'welcome': "🇮🇹 أهلاً بك في بوت مساعد الطلاب والمهاجرين في بيروجا!\n\nيرجى التسجيل للوصول إلى الميزات.",
+        'main_menu_title': "القائمة الرئيسية:",
+        'register_prompt': " لاستخدام البوت، يرجى التسجيل باستخدام الأمر /register.",
+        'error_general': "حدث خطأ. يرجى المحاولة مرة أخرى أو الاتصال بالمسؤول.",
+        'invalid_input': "إدخال غير صالح. يرجى المحاولة مرة أخرى.",
+        'registration_success': "✅ تم تسجيلك بنجاح!",
+        'button_register': "📝 تسجيل",
+        'button_main_menu': "🏠 القائمة الرئيسية",
+        'button_back': "➡️ رجوع",
+        'button_res_hub': "📚 مركز الموارد",
+        'button_scholarships': "🎓 المنح الدراسية",
+        'button_isee': "📊 حاسبة ISEE",
+        'button_weather': "🌦 الطقس",
+        'button_news': "📰 الأخبار",
+        'button_fx': "💱 تحويل العملات",
+        'button_profile': "👤 الملف الشخصي",
+        'button_roommate': "👥 البحث عن شريك سكن",
+        'button_live_chat': "💬 محادثة مباشرة مع المسؤول",
+        'register_ask_name': "يرجى إدخال اسمك الكامل:",
+        'register_ask_age': "يرجى إدخال عمرك (بين 16 و 100):",
+        'register_ask_country': "يرجى إدخال بلدك:",
+        'register_ask_major': "يرجى إدخال تخصصك الدراسي:",
+        'register_ask_email': "يرجى إدخال بريدك الإلكتروني:",
+        'isee_intro': "هذا محاكي تعليمي لحساب ISEE. قد لا تكون النتائج دقيقة.",
+        'isee_ask_income': "يرجى إدخال دخل عائلتك السنوي باليورو:",
+        'isee_ask_property': "يرجى إدخال الحجم الإجمالي لممتلكات عائلتك بالمتر المربع (0 إذا لم يكن هناك):",
+        'isee_ask_family': "كم عدد أفراد عائلتك؟",
+        'isee_result': "📊 نتيجة حساب ISEE:\n\n- قيمة ISEE الخاصة بك: `{isee_value:.2f}`\n- حالة المنحة: `{status}`",
+        'isee_status_full': "كاملة",
+        'isee_status_partial': "جزئية",
+        'isee_status_none': "غير مؤهل",
+        'cost_select_city': "يرجى تحديد مدينة لمعرفة تكلفة المعيشة التقديرية:",
+        'error_cost_data_unavailable': "عذراً، بيانات تكلفة المعيشة غير متوفرة حالياً.",
+        'error_city_not_found': "عذراً، لم يتم العثور على معلومات لهذه المدينة.",
+        'button_back_to_cities': "⬅️ العودة إلى قائمة المدن",
+        'cost_details_template': """💰 *التكاليف الشهرية المقدرة في {city_name}*
+
+🏠 *السكن*:
+  - غرفة مفردة: *~€{rent_single}*
+  - غرفة مشتركة: *~€{rent_shared}*
+  - الفواتير: *~€{utilities}*
+
+🚌 *نمط الحياة*:
+  - بطاقة النقل: *€{transport}*
+  - البقالة: *~€{groceries}*
+  - بيتزا في الخارج: *€{pizza}*
+
+_{notes}_""",
+        'discounts_title': "💸 *خصومات الطلاب*\n\n",
+        'error_discounts_unavailable': "عذراً، معلومات الخصومات غير متوفرة حالياً.",
+        'error_no_more_discounts': "لم يتم العثور على المزيد من الخصومات.",
+        'button_previous': "⬅️ السابق",
+        'button_next': "➡️ التالي",
+        'language_select_category': "يرجى تحديد فئة لتعلم بعض العبارات الإيطالية:",
+        'error_language_unavailable': "عذراً، دروس اللغة غير متوفرة حالياً.",
+        'error_category_not_found': "الفئة غير موجودة.",
+        'button_back_to_categories': "⬅️ العودة إلى الفئات",
+        'upload_prompt': "يرجى إرسال الملف الذي ترغب في تحميله (مثل PDF، JPG، PNG).\nالحد الأقصى لحجم الملف: 10 ميغابايت.\n\nاكتب /cancel للإلغاء.",
+        'upload_processing': "جاري معالجة ملفك، يرجى الانتظار...",
+        'upload_success': "✅ تم تحميل ملفك بنجاح وأمان!",
+        'upload_canceled': "تم إلغاء التحميل.",
+        'error_upload_no_file': "لا يبدو أن هذا ملف. يرجى إرسال مستند أو صورة.",
+        'error_upload_too_large': "الملف كبير جداً. يرجى إرسال ملف أصغر من 10 ميغابايت.",
+        'error_upload_mime_type': "نوع الملف '{mime_type}' غير مدعوم.",
+        'error_upload_telegram_download': "عذراً، حدث خطأ أثناء تنزيل ملفك من خوادم تيليجرام.",
+        'error_upload_drive': "عذراً، حدث خطأ أثناء تحميل ملفك إلى مساحة التخزين لدينا.",
+        'error_upload_log_failed': "تم تحميل ملفك، ولكن حدث خطأ في نظامنا. يرجى الاتصال بمسؤول.",
+        'weather_prompt': "يرجى إدخال اسم مدينة، أو استخدام الخيار الافتراضي أدناه.",
+        'weather_button_perugia': "🌦 الطقس في بيروجا",
+        'error_invalid_city': "اسم المدينة غير صالح. يرجى المحاولة مرة أخرى.",
+        'error_weather_unavailable': "عذراً، خدمة الطقس غير متوفرة حالياً.",
+        'error_weather_city_not_found': "عذراً، لم أتمكن من العثور على مدينة '{city}'. يرجى التحقق من الإملاء والمحاولة مرة أخرى.",
+        'weather_details_template': """{emoji} *الطقس في {city}*
+
+*{description}*
+🌡️ درجة الحرارة: *{temp:.1f}°م*
+🤔 الإحساس الفعلي: *{feels_like:.1f}°م*
+💧 الرطوبة: *{humidity}%*
+💨 سرعة الرياح: *{wind_speed:.1f} م/ث*""",
+        'sim_select_city': "محاكي الميزانية: يرجى تحديد مدينة.",
+        'sim_ask_housing': "أي نوع من السكن تفضل؟",
+        'sim_housing_single': "غرفة مفردة",
+        'sim_housing_shared': "غرفة مشتركة",
+        'sim_ask_lifestyle': "كيف تصف نمط حياتك وعاداتك الترفيهية؟",
+        'sim_results_template': """✅ *نتائج محاكاة الميزانية الشهرية*
+
+- الإيجار: *€{rent}*
+- الفواتير (ماء، كهرباء، ...): *€{utilities}*
+- النقل: *€{transport}*
+- البقالة: *€{groceries}*
+- الترفيه وغيرها: *€{leisure}*
+
+- *المجموع التقديري: €{total}*""",
+        'consult_start': "أهلاً بك في خدمة الاستشارات الأكاديمية.\nسنطرح بعض الأسئلة لفهم ملفك الشخصي.\n\nأولاً، ما هو مجال دراستك المقصود؟",
+        'consult_ask_gpa': "ما هو معدلك التراكمي الحالي؟ يرجى تحديد المقياس.",
+        'consult_ask_budget': "ما هي ميزانيتك السنوية المقدرة للدراسة باليورو؟",
+        'consult_ask_language': "ما هو مستواك الحالي في اللغة الإيطالية أو الإنجليزية (مثل B1، IELTS 6.5)؟",
+        'consult_ask_cv': "أخيراً، يرجى تحميل سيرتك الذاتية كملف PDF أو DOCX.",
+        'consult_uploading_cv': "جاري تحميل سيرتك الذاتية، يرجى الانتظار...",
+        'consult_error_cv_upload': "حدث خطأ أثناء تحميل سيرتك الذاتية. يرجى المحاولة مرة أخرى أو الاتصال بمسؤول.",
+        'consult_error_cv_format': "لا يبدو أن هذا ملف سيرة ذاتية صالح. يرجى إرسال مستند PDF أو DOCX.",
+        'consult_success': "✅ شكراً لك! تم تقديم طلب الاستشارة الخاص بك. سنتصل بك قريباً.",
+        'consult_error_saving': "حدث خطأ أثناء حفظ طلبك. يرجى الاتصال بمسؤول.",
+        'roommate_welcome': "أهلاً بك في مكتشف شركاء السكن! ماذا تود أن تفعل؟",
+        'roommate_button_create': "📝 إنشاء / تحديث الملف الشخصي",
+        'roommate_button_search': "🔍 البحث عن شركاء سكن",
+        'roommate_create_start': "لنقم بإنشاء ملفك الشخصي للبحث عن شريك سكن.\n\nما هي ميزانيتك الشهرية للإيجار باليورو؟",
+        'roommate_ask_location': "في أي منطقة تبحث عن سكن؟ (مثل Centro، Elce)",
+        'roommate_ask_habits': "هل أنت شخص هادئ أم اجتماعي في المنزل؟ (هادئ/اجتماعي)",
+        'roommate_ask_bio': "ممتاز! أخيراً، اكتب نبذة مختصرة عن نفسك (هواياتك، ماذا تدرس).",
+        'roommate_profile_saved': "✅ تم حفظ ملفك الشخصي للبحث عن شريك سكن بنجاح!",
+        'roommate_error_saving': "حدث خطأ أثناء حفظ ملفك الشخصي.",
+        'roommate_search_wip': "🔍 البحث عن شركاء سكن لم يتم تنفيذه بعد. يرجى العودة لاحقاً!",
+        'error_invalid_budget': "يرجى إدخال رقم صالح لميزانيتك.",
+        'roommate_error_no_profile': "للبحث، يجب عليك أولاً إنشاء ملفك الشخصي للبحث عن شريك سكن باستخدام زر 'إنشاء ملف شخصي'.",
+        'roommate_no_matches': "عذراً، لم يتم العثور على مطابقات مناسبة لملفك الشخصي.",
+        'roommate_no_more_matches': "لم يتم العثور على المزيد من المطابقات.",
+        'roommate_match_template': """*تم العثور على شريك سكن محتمل!*
+
+*عنه/عنها*: {bio}
+*الميزانية*: €{budget}
+*المنطقة*: {location}
+*العادات*: {habits}
+
+*للتواصل*: `{contact}`""",
+        'roommate_match_template_scored': """*تم العثور على شريك سكن محتمل!*
+*درجة التطابق*: {score}/100
+
+*عنه/عنها*: {bio}
+*الميزانية*: €{budget}
+*المنطقة*: {location}
+*العادات*: {habits}
+
+*للتواصل*: `{contact}`""",
+        'appt_select_service': "أهلاً بك في قسم حجز المواعيد. يرجى تحديد الخدمة التي تحتاجها:",
+        'appt_select_slot': "ممتاز. يرجى تحديد موعد متاح:",
+        'appt_confirm_booking': "لقد اخترت الموعد '{slot}'. هل تؤكد هذا الاختيار؟",
+        'appt_success': "✅ تم حجز موعدك بنجاح! سنتصل بك إذا لزم الأمر.",
+        'appt_canceled': "تم إلغاء حجز الموعد.",
+        'error_appointments_unavailable': "عذراً، حجز المواعيد غير متاح حالياً.",
+        'button_confirm': "✅ تأكيد",
+        'button_cancel': "❌ إلغاء",
+        'appt_reminder_24h': "🔔 تذكير: لديك موعد استشارة غداً في الساعة {slot}.",
+        'story_start': "نود أن نسمع قصة نجاحك! يرجى كتابة قصتك في رسالة واحدة.",
+        'story_ask_photo': "ممتاز! هل ترغب في إضافة صورة إلى قصتك؟",
+        'story_success': "✅ تم إرسال قصتك بنجاح وسيتم نشرها بعد المراجعة. شكراً لك!",
+        'button_yes': "✅ نعم",
+        'button_no': "❌ لا",
+        'qna_ask_question': "اكتب سؤالك. سنبحث أولاً في الأسئلة الشائعة.",
+        'qna_suggestions_found': "وجدنا بعض الأسئلة المشابهة. هل إجابتك هنا؟\nإذا لم تكن كذلك، فاضغط على الزر أدناه لإرسال سؤالك.",
+        'qna_submit_anyway': "هذا ليس سؤالي، أرسله",
+        'qna_success': "✅ تم إرسال سؤالك بنجاح. سيجيب المسؤولون عليه قريباً.",
+        'qna_answer_notification': """تمت الإجابة على سؤالك:
+
+*سؤالك*: {question}
+*الإجابة*: {answer}""",
+        'migration_checklist_title': "📋 *قائمة التحقق من الهجرة والإقامة*\n\nهذا دليل عام. قد تختلف خطواتك.",
+        'points_display': "🏆 لديك حالياً *{points}* نقطة. استمر في المشاركة لكسب المزيد!",
     }
 }
 
